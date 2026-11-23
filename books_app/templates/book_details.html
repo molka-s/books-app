@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }} - Book Details</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+      :root {
+    --color-background: #f9fafb;
+    --color-primary: #325e70;
+    --color-primary-light: #a5b4fc;
+    --color-secondary: #8b5cf6;
+    --color-accent: #f59e0b;
+    --color-text-dark: #111827;
+    --color-text-medium: #374151;
+    --color-text-light: #6b7280;
+    --color-white: #ffffff;
+
+    --font-primary: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    --shadow-subtle: 0 12px 40px rgba(0, 0, 0, 0.06);
+    --shadow-elegant: 0 20px 60px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 25px 70px rgba(0, 0, 0, 0.15);
+
+    --transition-smooth: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    --transition-fast: all 0.3s ease-in-out;
+}
+
+/* Ultra-Modern Reset */
+/* Global Reset */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+/* Base Styles */
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, var(--color-background) 0%, #f3f4f6 100%);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    perspective: 1000px;
+}
+
+/* Container */
+.book-details-container {
+    display: flex;
+    max-width: 1200px;
+    width: 90%;
+    margin: 4rem auto;
+    background: var(--color-white);
+    border-radius: 25px;
+    box-shadow: var(--shadow-elegant);
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+/* Book Image */
+.book-image {
+    flex: 0 0 40%;
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(20px);
+}
+
+.book-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+    filter: grayscale(5%) contrast(105%);
+    transform-origin: center;
+}
+
+.book-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.05) 50%, transparent 100%);
+    opacity: 0.7;
+    transition: var(--transition-smooth);
+}
+
+.book-image:hover img {
+    transform: scale(1.08) rotate(1deg);
+    filter: grayscale(0%) contrast(110%);
+}
+
+.book-image:hover::before {
+    opacity: 0.9;
+}
+
+/* Book Info */
+.book-info {
+    flex: 1;
+    padding: 3.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(to right, var(--color-white) 0%, rgba(245, 245, 250, 0.5) 100%);
+}
+
+.book-info h1 {
+    font-size: 2.7rem;
+    color: var(--color-primary);
+    margin-bottom: 1.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+}
+
+.book-info p {
+    color: var(--color-text-medium);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+/* Button Styles */
+.submit-button,
+.back-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: var(--color-white);
+    text-decoration: none;
+    border-radius: 60px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    transition: var(--transition-smooth);
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.2);
+    text-transform: uppercase;
+}
+
+.submit-button:hover,
+.back-button:hover {
+    transform: translateY(-7px) rotate(1deg);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .book-details-container {
+        flex-direction: column;
+    }
+}
+
+
+/* Original Star Rating with Enhanced Styling */
+.star-rating {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 2.5rem;
+    color: #e0e0e0;
+    cursor: pointer;
+    margin-right: 0.3rem;
+    transition: var(--transition-smooth);
+    transform-origin: center;
+}
+
+.star-rating label:hover,
+.star-rating input[type="radio"]:checked ~ label {
+    color: var(--color-accent);
+    transform: scale(1.15);
+    text-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+}
+
+.comment-section {
+    width:70%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.comment-section h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Styles des messages */
+.messages {
+    margin-bottom: 20px;
+}
+
+.alert {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.alert-info {
+    background-color: #d9edf7;
+    color: #31708f;
+}
+
+.alert-success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.alert-warning {
+    background-color: #fcf8e3;
+    color: #8a6d3b;
+}
+
+.alert-danger {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+/* Styles de la section d'évaluation */
+.star-rating {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 30px;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.star-rating input[type="radio"]:checked ~ label,
+.star-rating input[type="radio"]:hover ~ label,
+.star-rating input[type="radio"]:checked + label {
+    color: #f39c12;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #f39c12;
+}
+
+/* Styles de la zone de texte */
+.textarea {
+    margin-bottom: 15px;
+}
+
+.textarea textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.textarea textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Styles du bouton de soumission */
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Advanced Animations */
+@keyframes subtleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.book-details-container {
+    animation: subtleFloat 5s ease-in-out infinite;
+}
+
+.about-author {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 20px;
+    border-top: 2px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.author-image {
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #ddd;
+}
+
+.author-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.author-container {
+    flex-grow: 1;
+    margin-right:100px;
+}
+
+.author-container h2 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.follow-button {
+    display: inline-block;
+    padding: 8px 16px; /* Réduction de la taille */
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px; /* Moins arrondi pour un look plus compact */
+    font-weight: 600;
+    
+    box-shadow: 0 3px 6px rgba(0, 123, 255, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+    border: none;
+    font-size: 14px; /* Taille de la police plus petite */
+}
+
+/* Effet au survol */
+.follow-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 86, 179, 0.25);
+}
+
+/* Effet au focus pour l'accessibilité */
+.follow-button:focus {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+}
+
+
+.messages {
+    margin: 20px 0;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+.star-rating span {
+    font-size: 24px;
+    color: lightgray; /* Couleur des étoiles vides */
+}
+
+.star-rating .filled {
+    color: gold;
+}
+
+.star-rating .empty {
+    color: lightgray;
+}
+.reviews-section {
+    width:70%;
+    padding: 30px; /* Augmente l'espace à l'intérieur de la section */
+    margin: 20px auto; /* Ajoute de l'espace autour de la section */
+    background-color: #f9f9f9; /* Couleur de fond douce */
+    border-radius: 10px; /* Coins arrondis pour un look plus doux */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre subtile pour mettre en valeur */
+    overflow: hidden; /* Pour s'assurer que les éléments à l'intérieur ne débordent pas */
+    font-family: 'Arial', sans-serif; /* Police plus lisible */
+}
+
+/* Pour le titre de la section */
+.reviews-section h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color:#325e70; /* Couleur du texte */
+    text-align: center; /* Centrer le titre */
+}
+
+/* Pour les avis individuels */
+.review {
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fff; /* Couleur de fond des avis */
+    border-left: 5px solid #007bff; /* Bande de couleur pour mettre en valeur */
+    border-radius: 5px; /* Coins légèrement arrondis */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Ombre légère pour un effet de profondeur */
+}
+
+.review .comment-section p {
+    margin: 0;
+    color: #555; /* Couleur de texte plus claire pour le contenu */
+    line-height: 1.6;
+    text-align: left !important; /* Forcer l'alignement à gauche */
+
+}
+.review .comment-section p em {
+font-size: 11px;
+
+}
+
+/* Pour les auteurs des avis */
+.review .author {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #007bff; /* Couleur de l'auteur */
+}
+
+
+.reviews-section li .rating-stars {
+    color: #FFD700;
+    font-size: 16px;
+}
+
+/* Cas où il n'y a pas de critiques */
+.reviews-section p {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+
+
+/* Marges et espacements */
+.reviews-section li:last-child {
+    border-bottom: none;
+}
+
+
+.star-rating {
+    display: inline-block;
+    font-size: 1.5em; /* Taille des étoiles */
+}
+
+.star-rating .filled {
+    color: gold; /* Couleur des étoiles remplies */
+}
+
+.star-rating .empty {
+    color: #ddd; /* Couleur des étoiles vides */
+}
+.mt-4 { margin-top: 4rem; }
+.mb-4 { margin-bottom: 4rem; }
+.p-4 { padding: 1rem; }
+.shadow-subtle { box-shadow: var(--shadow-subtle); }
+.transition-fast { transition: var(--transition-fast); }
+.author-reviews-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    margin: 2px 0;
+}
+.book-carousel-container {
+    width: 90%;
+    margin: 4rem auto;
+    text-align: center;
+}
+
+.book-carousel-container h2 {
+    font-size: 2rem;
+    color:#325e70;
+    margin-bottom: 2rem;
+}
+
+.carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.carousel-track {
+    list-style: none;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    padding: 15px;
+    width:200px;
+    height:500px;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    background-color: var(--color-white);
+    border-radius: 10px;
+    box-shadow: var(--shadow-subtle);
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-bottom: 3px solid var(--color-primary);
+}
+
+.carousel-slide p {
+    margin-bottom:5px;
+    padding: 0.5rem;
+    font-size: 14px;
+    color: grey;
+}
+
+.carousel-slide  a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #325e70;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+.prev, .next {
+    border: none;
+    color:#325e70;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.review {
+        display: flex;
+        flex-direction: row;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e0e0e0;
+        font-family: Arial, sans-serif;
+        width: 100%;
+    }
+
+    .profile-section {
+        margin:30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-pic {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+    }
+
+    .user-info {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .user-name {
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .user-details {
+        font-size: 12px;
+        color: #666;
+    }
+
+    .fbutton {
+        margin-top: 5px;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+
+    /* Comment section */
+    .comment-section {
+        flex-grow: 1;
+    }
+
+    .rating {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .comment-date {
+        font-size: 12px;
+        color: #999;
+    }
+
+    .comment-text {
+        margin-right: 0;
+        font-size: 14px;
+        color: #333;
+        line-height: 1.5;
+    }
+    .borrow-section {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #f7fcff, #dbefff);
+    border: 3px solid #007bff;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    animation: slideIn 1.2s ease-out;
+}
+
+.borrow-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.15), transparent);
+    transform: rotate(45deg);
+    animation: pulse 3s infinite;
+    z-index: -1;
+}
+.borrow-section h3 {
+    font-size: 26px;
+    color: #004085;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline;
+    margin-right: 10px; /* Ajouter un peu d'espace entre les deux <h3> */
+}
+
+
+/* Couleurs spécifiques pour l'état */
+.borrow-section .text-success {
+    color: #28a745; /* Vert pour Disponible */
+}
+
+.borrow-section .text-danger {
+    color: #dc3545; /* Rouge pour Emprunté et Réservé */
+}
+
+.borrow-section .text-muted {
+    color: #6c757d; /* Gris pour statut inconnu */
+}
+
+.borrow-section p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.6;
+   
+    text-align: justify;
+}
+
+/* Style pour les boutons */
+.borrow-section .btn {
+    padding: 12px 30px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+}
+
+/* Effet au survol */
+.borrow-section .btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 85, 179, 0.5);
+}
+
+/* Bouton "Emprunter ce livre" */
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Bouton "Réserver ce livre" */
+.btn-warning {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+/* Animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1) rotate(45deg);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.5) rotate(45deg);
+        opacity: 0.4;
+    }
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup.hidden {
+    display: none;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content h3 {
+    font-size: 22px;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.popup-content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-close {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-close:hover {
+    background-color: #c82333;
+}
+.followed-button {
+    background-color: #377c39;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: default;
+    border-radius: 5px;
+}
+.fbutton {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.fbutton.followed {
+    background-color: #4CAF50;
+    cursor: default;
+}
+
+    </style>
+</head>
+<body>
+    <div class="book-details-container">
+        <div class="book-image">
+            {% if book.cover_img %}
+                <img src="{{ book.cover_img }}" alt="{{ book.title }}">
+            {% else %}
+                <div class="no-cover">No cover available</div>
+            {% endif %}
+        </div>
+    
+        <div class="book-info">
+            <h1>{{ book.title }}</h1>
+    
+            <!-- Section Average Rating -->
+            <div class="average-rating-section">
+                <h2>Average Rating</h2>
+                {% if average_rating %}
+                    <p><strong>{{ average_rating }}</strong> / 5</p>
+                    <div class="star-rating">
+                        {% for i in stars %}
+                            <span class="{% if i <= average_rating %}filled{% else %}empty{% endif %}">&#9733;</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>No ratings yet.</p>
+                {% endif %}
+            </div>
+    
+            <p><strong>Author:</strong> {{ book.author }}</p>
+            <p><strong>Description:</strong> {{ book.description }}</p>
+            <p><strong>Publication Year:</strong> {{ book.pub_year }}</p>
+            <p><strong>Genre:</strong> {{ book.get_genre_display }}</p>
+            <p><strong>Number of Pages:</strong> {{ book.num_pages }}</p> <!-- Added num_pages -->
+            <p><strong>Language:</strong> {{ book.language }}</p> <!-- Added language -->
+        </div>
+        
+
+    </div>
+    
+    <div class="borrow-section">
+        <h3>
+            📚 This book is 
+            <span class="{% if borrowed_by_user %}text-info{% elif statut == 'dispo' %}text-success{% elif statut == 'borrowed' or statut == 'reserved' %}text-danger{% else %}text-muted{% endif %}">
+                {% if reserved_by_user %}
+                    Currently Reserved by You
+                {% elif borrowed_by_user %}
+                    {% if reading_statut == 'finished' %}
+                        Finished by You
+                    {% else %}
+                        Currently Borrowed by You
+                    {% endif %}
+                {% elif statut == 'dispo' %}
+                    Available
+                {% elif statut == 'borrowed' %}
+                    Currently Borrowed
+                {% elif statut == 'reserved' %}
+                    Currently Reserved
+                {% else %}
+                    Unknown Status
+                {% endif %}
+            </span>
+        </h3><br>
+    
+        {% if borrowed_by_user %}
+            {% if reading_statut == 'finished' %}
+                <p>You have finished reading this book ! You can rate if you want .</p>
+            {% else %}
+                <p>You currently have this book! Enjoy your reading. If you're ready, you can go to your <strong>reading page</strong> to continue reading.</p>
+                <form method="get" action="{% url 'books_app:view_book' book_id=book.id_book %}">
+                    <button class="btn btn-primary">Go to Reading Page</button>
+                </form>
+            {% endif %}
+        
+        {% elif reserved_by_user %}
+            <p>You already reserved this book. Please wait for your turn, and we will notify you once it becomes available.</p>
+        
+        {% elif statut == 'dispo' %}
+            {% if posted_book %}
+                <p>Your book is currently available for borrowing.</p>
+            {% else %}
+                <p>Great news! This book is available for borrowing. <strong>You can borrow it now and enjoy reading it!</strong></p>
+                <p>Please note: If you borrow this book, you are expected to return it within <strong>{{ pret.period }} days</strong> as per our library policy.</p>
+                <form method="post" action="{% url 'books_app:borrow_book' book.id_book %}">
+                    {% csrf_token %}
+                    <button class="btn btn-success">Borrow this Book</button>
+                </form>
+            {% endif %}
+        
+        {% elif statut == 'borrowed' %}
+            {% if posted_book %}
+                {% if current_borrower %}
+                    <p>Your book is currently being read by {{ current_borrower.user.first_name }} {{ current_borrower.user.last_name }}.</p>
+                {% endif %}
+            {% else %}
+                <p>Unfortunately, this book is currently borrowed. But don't worry! You can reserve it now, and we will notify you once it becomes available.</p>
+                <form method="post" action="{% url 'books_app:reserve_book' book.id_book %}">
+                    {% csrf_token %}
+                    <button class="btn btn-warning">Reserve this Book</button>
+                </form>
+            {% endif %}
+        
+        {% elif reserved_by_other %}
+            <p>This book is currently reserved by another user. But no worries! You can still reserve it and we will notify you once it becomes available.</p>
+            <form method="post" action="{% url 'books_app:reserve_book' book.id_book %}">
+                {% csrf_token %}
+                <button class="btn btn-warning">Reserve this Book</button>
+            </form>
+        
+        {% else %}
+            <p>Sorry, the status information for this book is currently unavailable. Please contact the library for more details.</p>
+        {% endif %}
+    </div>
+    
+    {% if messages %}
+        <div class="alert alert-info">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+
+    <div class="comment-section">
+        <h3>Leave a Comment or Rate the Book</h3>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    
+        <form method="POST" action="{% url 'books_app:submit_rating' book.id_book %}">
+            {% csrf_token %}
+            <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5">&#9733;</label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4">&#9733;</label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3">&#9733;</label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2">&#9733;</label>
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1">&#9733;</label>
+            </div>
+            <div class="textarea">
+                <textarea name="comment" placeholder="Leave your comment here..." required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Submit Review</button>
+        </form>
+    </div>
+    
+
+    <a href="{% url 'books_app:page_rec' %}" class="back-button">Back to recommended books</a>
+
+    
+    {% load static %}
+
+   <!-- Section About Author -->
+<div class="about-author">
+    <div class="author-image">
+        <img src="{% static 'avatar.png' %}" alt="Default Avatar" />
+    </div>
+    <div class="author-container">
+        <h2>About {{ book.author }}</h2>
+        <p>For more books, you can follow {{ book.author }}.</p>
+
+        <!-- Follow Author Button -->
+        {% if following_author %}
+            <button class="followed-button">Followed &#10004;</button> <!-- Show Followed with a tick -->
+        {% else %}
+            <a href="{% url 'books_app:follow_author' book.id_book %}" class="follow-button">Follow Author</a>
+        {% endif %}
+    </div>
+
+    <div class="author-image">
+        <img src="{% static 'avatar.png' %}" alt="Default Avatar" />
+    </div>
+    <div class="author-container">
+        <h2>About {{ book_owner.username }}</h2>
+        <p>For more books posted by this publisher, you can follow {{ book_owner.username }}.</p>
+
+        <!-- Follow Publisher Button -->
+        {% if following_publisher %}
+            <button class="followed-button">Followed &#10004;</button> <!-- Show Followed with a tick -->
+        {% elif book_owner.username == request.user.username %}
+        {% else %}
+            <a href="{% url 'books_app:follow_publisher' book_owner.username book.id_book %}" class="follow-button">Follow Publisher</a>
+        {% endif %}
+    </div>
+</div>
+<div class="reviews-section">
+    <h2>Ratings & Reviews</h2>
+    {% if reviews_and_followers %}
+    {% for review_data in reviews_and_followers %}
+        <div class="review">
+            <div class="profile-section">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" class="profile-pic">
+                <div class="user-info">
+                    <p><strong>{{ review_data.review.user.username }}</strong></p>
+                    <span class="user-details">{{ review_data.num_reviews }} reviews<br>{{ review_data.num_followers }} followers</span>
+
+                    <!-- Only show follow button if the reviewer is not the current user -->
+                    {% if review_data.review.user != request.user %}
+                        <!-- Find the follow status for the current review -->
+                        {% for follow_status in follow_status_list %}
+                            {% if follow_status.review_user_id == review_data.review.user.id %}
+                                <button class="fbutton">
+                                    {% if follow_status.is_following %}
+                                        Followed &#10004; <!-- Show Followed with a tick -->
+                                    {% else %}
+                                        <a href="{% url 'books_app:follow_publisher' review_data.review.user.username book.id_book %}" style="text-decoration: none;color: white;">Follow</a>
+                                    {% endif %}
+                                </button>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="comment-section">
+                <span class="star-rating">
+                    {% for i in stars %}
+                        <span class="{% if i <= review_data.review.rating %}filled{% else %}empty{% endif %}">&#9733;</span>
+                    {% endfor %}
+                </span>
+                <p>{{ review_data.review.comment }}</p>
+                <p><em>Reviewed on: {{ review_data.review.created_at|date:"F j, Y" }}</em></p>
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+        <p>No reviews yet. Be the first to review this book!</p>
+    {% endif %}
+</div>
+
+<div class="book-carousel-container"> 
+    <h2>Discover similar books</h2>
+    <div class="carousel">
+        <button class="prev">&#10094;</button>
+        <div class="carousel-track-container">
+            <ul class="carousel-track">
+                {% for similar_book in similar_books %}
+                <li class="carousel-slide">
+                    <img src="{{ similar_book.cover_img }}" alt="{{ similar_book.title }}">
+                    <a href="{% url 'books_app:book_detail' similar_book.id_book %}">{{ similar_book.title }}</a><p> {{ similar_book.author }}</p>
+                </li>
+                {% empty %}
+                <p>No similar books found</p>
+                {% endfor %}
+            </ul>
+        </div>
+        <button class="next">&#10095;</button>
+    </div>
+</div>
+
+
+    
+    <script>
+        // Load the author's photo dynamically from Google
+        document.addEventListener("DOMContentLoaded", function () {
+            const authorName = "{{ book.author }}".trim();
+            const authorPhoto = document.getElementById("author-photo");
+            if (authorName) {
+                authorPhoto.src = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(authorName)}&imgtype=face`;
+            }
+        });
+    
+        function followAuthor() {
+            alert("You are now following {{ book.author }}!");
+        }
+const track = document.querySelector('.carousel-track');
+const slides = Array.from(track.children);
+const nextButton = document.querySelector('.next');
+const prevButton = document.querySelector('.prev');
+const slideWidth = slides[0].getBoundingClientRect().width;
+
+let currentIndex = 0;
+
+nextButton.addEventListener('click', () => {
+    if (currentIndex < slides.length - 1) {
+        currentIndex++;
+        const amountToMove = -slideWidth * currentIndex;
+        track.style.transform = `translateX(${amountToMove}px)`;
+    }
+});
+
+prevButton.addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        const amountToMove = -slideWidth * currentIndex;
+        track.style.transform = `translateX(${amountToMove}px)`;
+    }
+});
+
+    </script>
+
+ 
+
+
+   
+</body>
+</html>

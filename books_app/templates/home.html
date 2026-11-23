@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+
+<head>
+   
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booktopia</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Slick CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+section{
+    width: 100%;
+    height: 100vh;
+    background-image: url("{% static 'bg.png' %}");
+    background-size: cover;
+    background-position: center;
+}
+
+section nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    padding: 12px 40px; /* Légère réduction de l'espacement de la barre */
+    height: 130px; /* Taille modérée de la barre */
+    transition: all 0.3s ease-in-out;
+    border-bottom: 2px solid #e2e2e2;
+}
+
+section nav .logo img {
+    width: 130px; /* Réduction modérée du logo */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+section nav .logo img:hover {
+    transform: scale(1.05); /* Effet léger d'agrandissement du logo */
+}
+
+section nav ul {
+    list-style: none;
+    display: flex;
+    gap: 35px; /* Espacement réduit entre les éléments du menu */
+    margin: 0;
+}
+
+section nav li {
+    position: relative;
+    display: inline-block;
+}
+
+section nav li a {
+    text-decoration: none;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    font-size: 15px; /* Légère réduction de la taille de la police */
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease, padding 0.3s ease;
+}
+
+section nav li a:hover {
+    color: #1f495a;
+    transform: translateY(-3px); /* Déplacement léger vers le haut */
+    padding-bottom: 5px; /* Réduction modérée de l'espace sous le lien */
+    border-bottom: 2px solid #1f495a;
+}
+
+section nav .social_icon {
+    display: flex;
+    gap: 18px; /* Espacement réduit entre les icônes sociales */
+}
+
+section nav .social_icon i {
+    margin: 0;
+    font-size: 22px; /* Taille modérée des icônes sociales */
+    color: #333;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+section nav .social_icon i:hover {
+    color: #1f495a;
+    cursor: pointer;
+    transform: scale(1.1); /* Effet d'agrandissement léger */
+}
+
+section nav:hover {
+    background: #f9f9f9;
+}
+
+section nav .logo img, section nav li a, section nav .social_icon i {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Animation du menu */
+section nav li a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #1f495a;
+    transition: width 0.3s ease, left 0.3s ease;
+    transform: translateX(-50%);
+}
+
+section nav li a:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+/* Menu déroulant sur mobile */
+@media (max-width: 768px) {
+    section nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px; /* Espacement modéré sur mobile */
+    }
+
+    section nav ul {
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    section nav .social_icon {
+        margin-top: 15px;
+    }
+
+    section nav li a {
+        font-size: 16px; /* Ajuste la taille de la police sur mobile */
+    }
+}
+
+section .main{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    top: 10%;
+}
+
+section .main h1{
+    position: relative;
+    font-size: 55px;
+    top: 80px;
+    left: 25px;
+}
+
+section .main h1 span{
+    color: #325e70;
+}
+
+section .main p{
+    width: 650px;
+    text-align: justify;
+    line-height: 22px;
+    position: relative;
+    top: 125px;
+    left: 25px;
+}
+
+section .main .main_tag .main_btn{
+    background: #1b3b47;
+    padding: 10px 20px;
+    position: relative;
+    top: 200px;
+    left: 25px;
+    color: #fff;
+    text-decoration: none;
+}
+
+section .main .main_img img{
+    width: 780px;
+    position: relative;
+    top: 90px;
+    left: 20px;
+}
+
+
+
+
+/*services*/
+
+.services{
+    width: 100%;
+    height: auto;
+    margin: 35px 0;
+}
+
+.services .services_box{
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.services .services_box .services_card{
+    text-align: center;
+    width: 310px;
+    height: auto;
+    box-shadow: 0 0 8px #8db1bf;
+    padding: 15px 10px;
+}
+
+.services .services_box .services_card i{
+    color: #325e70;
+    font-size: 45px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.services .services_box .services_card h3{
+    margin-bottom: 10px;
+}
+
+
+/* About Section */
+.about {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap; /* Ensure responsiveness */
+}
+
+.about .about_image img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+}
+
+.about .about_tag h1 {
+    font-size: 50px;
+    position: relative;
+    bottom: 35px;
+}
+
+.about .about_tag p {
+    line-height: 22px;
+    width: 650px;
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+.about .about_tag .about_btn {
+    padding: 10px 20px;
+    background: #325e70;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    top: 50px;
+}
+
+/* Styles for the Genres Section */
+.genres-section {
+    width: 100%;
+    padding: 50px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+    margin-top: 50px; /* Adjust spacing from About section */
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    color: black;
+}
+
+.genres-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.genre-card {
+    width: 280px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.genre-card:hover {
+    transform: translateY(-10px);
+}
+
+.genre-card img {
+    width: 100%;
+    height: auto;  /* Ensure the image maintains its aspect ratio */
+    object-fit: cover;  /* This ensures the image will cover the entire space of the container without stretching */
+    filter: brightness(0.7);
+    transition: filter 0.3s ease;
+
+}
+
+.genre-card:hover img {
+    filter: brightness(1);
+}
+.genre-info {
+    padding: 20px;
+    background-color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 25px;
+}
+
+.genre-info h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.genre-info p {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.btn-genre {
+    display: inline-block;
+    background-color: #37525c;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-genre:hover {
+    background-color: #0d120d;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .about {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .about .about_image img {
+        max-width: 100%;
+    }
+
+    .genres-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .genre-card {
+        width: 90%;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+}
+
+
+/* Books */
+/* Style pour la boîte contenant les livres */
+.featured_boks {
+    width: 100%;
+    height: 100vh;
+    padding: 70px 0;
+    overflow: hidden; /* Masquer les éléments qui dépassent de la boîte */
+}
+
+.featured_boks h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    font-size: 45px;
+}
+
+/* Définir la taille de la boîte des livres et le défilement horizontal */
+.featured_boks .featured_book_box {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    animation: scrollBooks 30s linear infinite; /* Animation de défilement */
+}
+
+/* Animation de défilement continu */
+@keyframes scrollBooks {
+    0% {
+        transform: translateX(0); /* Commencer à la position de départ */
+    }
+    100% {
+        transform: translateX(-100%); /* Déplacer complètement la largeur du conteneur */
+    }
+}
+
+/* Les cartes des livres */
+.featured_boks .featured_book_box .featured_book_card {
+    width: 250px;
+    height: 420px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #919191;
+    margin: 0 10px;
+    flex-shrink: 0; /* Ne pas rétrécir */
+    display: flex;
+    flex-direction: column; /* Aligner les éléments verticalement */
+    justify-content: space-between; /* Espacement entre les éléments */
+}
+
+/* Réduire l'ombre du livre lorsque la souris passe dessus */
+.featured_boks .featured_book_box .featured_book_card:hover {
+    box-shadow: 0 0 5px #325e70;
+}
+
+/* Image du livre */
+.featured_boks .featured_book_box .featured_book_card .featurde_book_img img {
+    width: 150px;
+    height: auto; /* Maintenir les proportions de l'image */
+    margin: 0 auto;
+}
+
+/* Infos sur le livre */
+.featured_boks .featured_book_box .featured_book_card .featurde_book_tag h2 {
+    margin: 12px;
+}
+
+.featured_boks .featured_book_box .featured_book_card .featurde_book_tag .writer {
+    color: #919191;
+}
+
+.featured_boks .featured_book_box .featured_book_card .featurde_book_tag .categories {
+    color: #325e70;
+    margin-top: 8px;
+}
+
+.featured_boks .featured_book_box .featured_book_card .featurde_book_tag .book_price {
+    margin-top: 8px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.featured_boks .featured_book_box .featured_book_card .featurde_book_tag .book_price sub {
+    font-weight: 100;
+    padding: 0 5px;
+}
+
+/* Alignement des boutons Learn More */
+.featured_boks .featured_book_box .featured_book_card .featurde_book_tag .f_btn {
+    padding: 10px 20px;
+    border: 2px solid #3a5f6e;
+    text-decoration: none;
+    color: #fff;
+    background-color: #698d9b;
+    margin-top: auto; /* Permet d'aligner le bouton en bas de la carte */
+    transition: background-color 0.3s ease, color 0.3s ease;
+   
+}
+
+.featured_boks .featured_book_box .featured_book_card .featurde_book_tag .f_btn:hover {
+    background-color: #3a5f6e;
+    color: #fff; /* Change le texte en blanc lors du survol */
+}
+
+/*arrivals*/
+
+.arrivals {
+    width: 100%;
+    height: auto;
+    margin-bottom: 35px;
+    background-color: #f7f9fc; /* Couleur de fond claire et moderne */
+    padding: 50px 0; /* Ajout d'un peu d'espace autour de la section */
+}
+
+.arrivals h1 {
+    font-size: 40px;
+    text-align: center;
+    color: #1f495a;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.arrivals .arrivals_box {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Grille responsive */
+    grid-gap: 30px; /* Espacement entre les livres */
+    justify-items: center;
+    padding: 0 10px;
+}
+
+.arrivals .arrivals_box .arrivals_card {
+    width: 100%;
+    height: 380px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre douce pour les cartes */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.arrivals .arrivals_box .arrivals_card:hover {
+    transform: translateY(-10px); /* Léger effet de montée lors du survol */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Ombre plus forte au survol */
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_image {
+    width: 100%;
+    height: 220px;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.arrivals .arrivals_box .arrivals_card:hover .arrivals_image img {
+    transform: scale(1.05); /* Zoom léger de l'image */
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag {
+    padding: 15px;
+    text-align: left;
+    margin-bottom: 20px;
+
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag p {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    margin: 10px 0;
+    color:#1f495a;
+    font-weight: 600;
+    margin-bottom: 40px;
+
+
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag .arrivals_icon {
+    font-size: 22px;
+    color: #1f495a;
+    margin: 10px 0;
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag .arrivals_btn {
+    padding: 10px 25px;
+    border: 2px solid #1f495a;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #1f495a;
+    background-color: #eaeff1;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag .arrivals_btn:hover {
+    background-color: #1f495a;
+    color: #fff; /* Change le texte en blanc lors du survol */
+}
+
+/* Reviews Section */
+.reviews {
+    width: 100%;
+    padding: 60px 0;
+    background-color: #f4f7fa;
+}
+
+.reviews h1 {
+    text-align: center;
+    font-size: 50px;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Review Box Layout */
+.reviews .review_box {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px; /* To add some space between the review cards */
+}
+
+/* Individual Review Card */
+.reviews .review_box .review_card {
+    width: 350px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect on card */
+.reviews .review_box .review_card:hover {
+    transform: translateY(-10px); /* Slight lift effect */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Reviewer Image */
+.reviews .review_box .review_card .card_top img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+/* Review Text */
+.reviews .review_box .review_card .card p {
+    font-size: 16px;
+    color: #34495e;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Review Icons (Stars) */
+.reviews .review_box .review_card .card .review_icon i {
+    color: #f39c12;
+    font-size: 18px;
+}
+
+/* Read More Button */
+.reviews .review_box .review_card .read-more-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #1abc9c;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reviews .review_box .review_card .read-more-btn:hover {
+    background-color: #16a085;
+}
+
+/* Icon for close button */
+.reviews .review_box .review_card i {
+    float: right;
+    font-size: 120px;
+    color: #eaeaea;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+
+/*Banner*/
+
+.banner{
+    width: 100%;
+    height: 50vh;
+    background-image: url(image/banner.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.banner .banner_btn{
+    padding: 8px 20px;
+    background: #325e70;
+    text-decoration: none;
+    color: #fff;
+    position: relative;
+    top: 70%;
+    left: 7%;
+}
+
+
+
+
+/*Blog*/
+
+.blog{
+    width: 100%;
+    height: auto;
+    margin: 25px 0;
+}
+
+.blog h1{
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 30px;
+}
+
+.blog .blog_box{
+    width: 95%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.blog .blog_box .blog_card{
+    margin: 0 auto;
+    width: 450px;
+    height: auto;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+}
+
+.blog .blog_box .blog_card .blog_img{
+    width: 450px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.blog .blog_box .blog_card .blog_img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.blog .blog_box .blog_card .blog_tag{
+    padding: 20px;
+}
+
+.blog .blog_box .blog_card .blog_tag h2{
+    color:#325e70;
+}
+
+.blog .blog_box .blog_card .blog_tag p{
+    margin-top: 10px;
+    text-align: justify;
+    line-height: 22px;
+}
+
+.blog .blog_box .blog_card .blog_tag .blog_icon{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #82878a;
+    cursor: pointer;
+}
+
+
+
+
+/*Footer*/
+
+footer{
+    width: 100%;
+    background: #eaeaea;
+}
+
+footer .footer_main{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+footer .footer_main .tag{
+    margin: 10px 0;
+}
+
+footer .footer_main .tag img{
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+footer .footer_main .tag p{
+    width: 250px;
+    line-height: 22px;
+    text-align: justify;
+}
+
+footer .footer_main .tag h1{
+    font-size: 25px;
+    margin: 25px 0;
+    color: #000;
+}
+
+footer .footer_main .tag a{
+    display: block;
+    color: black;
+    text-decoration: none;
+    margin: 10px 0;
+}
+
+footer .footer_main .tag i{
+    margin-right: 10px;
+}
+
+footer .footer_main .tag .social_link i{
+    margin: 0 5px;
+}
+
+footer .footer_main .tag .search_bar{
+    width: 230px;
+    height: 30px;
+    background: rgba(202,202,202);
+    border-radius: 25px;
+}
+
+footer .footer_main .tag .search_bar input{
+    width: 200px;
+    padding: 2px 0;
+    position: relative;
+    top: 17%;
+    left: 6%;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    background: none;
+}
+
+footer .footer_main .tag .search_bar button{
+    padding: 7px 15px;
+    background: #557172;
+    border: none;
+    margin-top: 15px;
+    border-radius: 25px;
+    color: #fff;
+    cursor: pointer;
+}
+
+footer .end{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    color: #000;
+}
+
+footer .end span{
+    color: #8da6b0;
+    margin-left: 10px;
+}
+
+
+/* Popup */
+.popup {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Légère opacité */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-30px); /* Effet d'élévation */
+    transition: transform 0.3s ease-out; /* Animation d'apparition */
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.popup-close:hover {
+    color: #1f495a;
+}
+
+.popup h2 {
+    color: #1f495a;
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.popup p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.popup button {
+    background-color: #1f495a;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.popup button:hover {
+    background-color: #698d9b;
+    transform: scale(1.05); /* Effet de zoom léger sur le bouton */
+}
+
+.popup button:focus {
+    outline: none;
+}
+
+.popup button:active {
+    background-color: #1f495a;
+    transform: scale(0.98); /* Effet de pression sur le bouton */
+}
+
+/* Animation d'ouverture du popup */
+.popup.show .popup-content {
+    transform: translateY(0);
+}
+
+/* Menu déroulant sur mobile */
+@media (max-width: 768px) {
+    .popup-content {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .popup h2 {
+        font-size: 20px;
+    }
+
+    .popup p {
+        font-size: 14px;
+    }
+}
+
+
+
+/* Chatbot */
+.chatbot {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* Positionner à gauche de la page */
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none; /* Masquer le chatbot au début */
+    z-index: 1000;
+    max-width: 300px;
+    width: auto;
+}
+
+.chatbot .chatbot-message {
+    margin-bottom: 10px;
+}
+
+.chatbot .chatbot-btn,
+.chatbot .chatbot-close {
+    background-color: #1abc9c;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.chatbot .chatbot-btn:hover,
+.chatbot .chatbot-close:hover {
+    background-color: #16a085;
+}
+
+.chatbot .chatbot-close {
+    background-color: #e74c3c;
+    margin-left: 10px;
+}
+
+.chatbot .chatbot-close:hover {
+    background-color: #c0392b;
+}
+
+    </style>
+</head>
+<body>
+{% load static %} 
+ <!-- Popup d'inscription -->
+<div id="signup-popup" class="popup">
+    <div class="popup-content">
+        <span class="popup-close" id="popup-close">&times;</span>
+        <h2>Join Booktopia!</h2>
+        <p>Become a member and explore thousands of books. Sign up now!</p>
+        <button id="signup-btn" ><a href="{% url 'books_app:login' %}" style="text-decoration: none;color:white;">Sign Up</a></button>
+        <button id="cancel-btn">Cancel</button>
+    </div>
+</div>
+
+
+<!-- Ton autre contenu (scripts JavaScript, etc.) -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- Si tu utilises des icônes FontAwesome -->
+  <!-- Chatbot -->
+<div id="chatbot" class="chatbot">
+    <div class="chatbot-message">
+        <p>Hi there! Do you need help?</p>
+    </div>
+    <button class="chatbot-btn">Yes, I need help!</button>
+    <button class="chatbot-close">X</button>
+</div>
+
+<section class="main-content" id="main-content">
+
+        <nav>
+
+            <div class="logo">
+                <img src="{% static 'logo.png' %}">
+            </div>
+
+            <ul>
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#About">About</a></li>
+                <li><a href="#Featured">Featured</a></li>
+                <li><a href="#Arrivals">Arrivals</a></li>
+                <li><a href="#Reviews">Reviews</a></li>
+                <li><a href="#Blog">Blog</a></li>
+                <li><a href="{% url 'books_app:login' %}">Login</a></li>
+            </ul>
+
+            <div class="social_icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-heart"></i>
+            </div>
+
+        </nav>
+
+        <div class="main">
+
+            <div class="main_tag">
+                <h1>WELCOME TO<br><span>BOOKTOPIA</span></h1>
+                
+
+                <p>
+                    Discover a smarter way to explore and manage books. Booktopia uses AI to offer personalized recommendations and streamline your book searches, helping you find titles that match your unique tastes. Dive into a seamless experience tailored just for readers like you!
+                </p>
+                <a href="#" class="main_btn">Learn More</a>
+
+            </div>
+
+            <div class="main_img">
+                <img src="{% static 'table.png' %}">
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+
+    <!--Services-->
+
+    <div class="services">
+
+        <div class="services_box">
+
+            <div class="services_card">
+                <i class="fa-solid fa-book"></i> <!-- Icon for Manage Your Library -->
+                <h3>Manage Your Library
+                </h3>
+                <p>
+                    Add books to your library and track your reading progress easily                </p>
+            </div>
+
+            <div class="services_card">
+                <i class="fa-solid fa-comment-dots"></i> <!-- Icon for Share Reviews and Ratings -->
+                <h3>Share Reviews and Ratings                </h3>
+                <p>
+                    Leave reviews and ratings to influence personalized recommendations.
+
+                </p>
+            </div>
+
+            <div class="services_card">
+                <i class="fa-solid fa-lightbulb"></i> <!-- Icon for Smart Suggestions -->
+                <h3>Smart Suggestions                </h3>
+                <p>
+                    Receive book recommendations based on your favorite authors, genres, and past readings.
+                </p>
+            </div>
+
+            <div class="services_card">
+                <i class="fa-solid fa-search"></i> <!-- Icon for Advanced Search and Filters -->
+                <h3>Advanced Search and Filters                </h3>
+                <p>
+                    Explore books by genre, author, or rating using powerful search and filtering options.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+    <!-- About Section -->
+<div class="about">
+    <div class="about_image">
+        <img src="{% static 'about.png' %}" alt="About Us Image">
+    </div>
+    <div class="about_tag">
+        <h1>About Us</h1>
+        <p>
+            At Booktopia, we’re passionate about transforming how readers discover, organize, and enjoy books. Founded on the idea of blending technology with the love of reading, Booktopia is your intelligent bookstore and book management assistant. Our AI-driven platform learns your preferences to bring personalized book recommendations, streamline your searches, and simplify your library management. Whether you’re an avid reader, a casual browser, or a collector, Booktopia is here to enhance every step of your reading journey. Join us in exploring a world where books meet innovation, making every reader’s experience more enriching and enjoyable.
+        </p>
+        <a href="#" class="about_btn">Learn More</a>
+    </div>
+</div>
+
+<!-- Genres Section -->
+<div class="genres-section">
+    <h2 class="section-title">Book Genres</h2>
+    <div class="genres-container">
+        <div class="genre-card">
+            <img src="{% static 'romance.jpg' %}" alt="Romance">
+            <div class="genre-info">
+                <h3>Romance</h3>
+                <p>Discover captivating and heartfelt love stories.</p>
+                <a href="/genre/romance" class="btn-genre">Explore</a>
+            </div>
+        </div>
+        <div class="genre-card">
+            <img src="{% static 'horror.webp' %}" alt="Horror">
+            <div class="genre-info">
+                <h3>Horror</h3>
+                <p>Guaranteed thrills with our top horror books.</p>
+                <a href="/genre/horror" class="btn-genre">Explore</a>
+            </div>
+        </div>
+        <div class="genre-card">
+            <img src="{% static 'fantasy.jpg' %}" alt="Fantasy">
+            <div class="genre-info">
+                <h3>Fantasy</h3>
+                <p>Step into a magical world with our fantasy books.</p>
+                <a href="/genre/fantasy" class="btn-genre">Explore</a>
+            </div>
+        </div>
+        <div class="genre-card">
+            <img src="{% static 'scifi.png' %}" alt="Science Fiction">
+            <div class="genre-info">
+                <h3>Science Fiction</h3>
+                <p>Explore futuristic worlds and advanced technologies.</p>
+                <a href="/genre/scifi" class="btn-genre">Explore</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+
+
+<!-- Books -->
+<div class="featured_boks">
+    <h1>Featured Books</h1>
+
+    <div class="featured_book_box">
+        {% for book in featured_books %}
+            <div class="featured_book_card">
+                <div class="featurde_book_img">
+                    <img src="{{ book.cover_img }}" alt="{{ book.title }}">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>{{ book.title }}</h2>
+                    <p class="writer">{{ book.author }}</p>
+                    <div class="categories">
+                        {% for value, label in book.genre %}
+                            <span>{{ label }}</span>{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+    
+<!-- New Arrivals -->
+<div class="arrivals">
+    <h1>New Arrivals</h1>
+
+    <div class="arrivals_box">
+        {% for book in new_arrivals %}
+            <div class="arrivals_card">
+                <div class="arrivals_image">
+                    <img src="{{ book.cover_img }}" alt="{{ book.title }}">
+                </div>
+                <div class="arrivals_tag">
+                    <p>{{ book.title }}</p>
+                    <div class="arrivals_icon">
+                        <!-- Rating logic -->
+                    </div>
+                    <a href="#" class="arrivals_btn">Learn More</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+
+    <!-- Reviews Section -->
+<div class="reviews">
+    <h1>REVIEWS</h1>
+
+    <div class="review_box">
+        <!-- Review 1 -->
+        <div class="review_card">
+            <i class="fa-solid fa-quote-right"></i>
+            <div class="card_top">
+                <img src="{% static 'review_1.png' %}" alt="Reviewer Image 1">
+            </div>
+            <div class="card">
+                <h2>John Deo</h2>
+                <p>"I’ve been using this platform for a few months now, and it has been a game changer for organizing 
+                    my reading list! The user interface is clean, easy to navigate, and I love how simple it is to add 
+                    books manually or by scanning barcodes. The recommendations are spot on!"
+                </p>
+                <div class="review_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review_card">
+            <i class="fa-solid fa-quote-right"></i>
+            <div class="card_top">
+                <img src="{% static 'review_2.png' %}" alt="Reviewer Image 2">
+            </div>
+            <div class="card">
+                <h2>Emma Davis</h2>
+                <p>"I’ve tried several book management platforms, but this one is by far the best! The ability to track 
+                    borrowings and loans is incredibly useful. Plus, the reminders for due dates help me avoid late returns. 
+                    It's like having a personal librarian!"
+                </p>
+                <div class="review_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review_card">
+            <i class="fa-solid fa-quote-right"></i>
+            <div class="card_top">
+                <img src="{% static 'review_3.png' %}" alt="Reviewer Image 3">
+            </div>
+            <div class="card">
+                <h2>Michael Brown</h2>
+                <p>"As a book lover, I’ve been searching for a platform to keep track of all my books, and I’m thrilled 
+                    with this one! The ability to add books via barcode scanning makes it so much easier to manage. Plus, 
+                    the personalized recommendations based on my reading habits are fantastic!"
+                </p>
+                <div class="review_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="review_card">
+            <i class="fa-solid fa-quote-right"></i>
+            <div class="card_top">
+                <img src="{% static 'review_4.png' %}" alt="Reviewer Image 4">
+            </div>
+            <div class="card">
+                <h2>Alice Walker</h2>
+                <p>"I love this platform, but there are a few features I’d love to see improved. Sometimes the 
+                    search function doesn't pull up all the books I’m looking for, and it can be a bit frustrating. 
+                    However, the customer support team is responsive and always tries to resolve any issues quickly."
+                </p>
+                </p>
+                <div class="review_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+   
+
+
+
+
+
+    <!--Blog-->
+    
+    <div class="blog">
+        <h1>OUR BLOG</h1>
+        <div class="blog_box">
+
+            <div class="blog_card">
+                <div class="blog_img">
+                    <img src="{% static 'blog_1.jpg' %}">
+                </div>
+                <div class="blog_tag">
+                    <h2>Modern Mrs. Darcy (Anne Bogel) </h2>
+                    <p>
+                        Known for her blog on books and lifestyle, Anne Bogel offers thoughtful reviews,
+                         reading lists, and reading challenges. Her "What Should I Read Next?"
+                         podcast is also a favorite among book lovers looking for personalized book recommendations.
+                    </p>
+                    <div class="blog_icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog_card">
+                <div class="blog_img">
+                    <img src="{% static 'blog_2.jpg' %}">
+                </div>
+                <div class="blog_tag">
+                    <h2>The Literary Edit (Lucy Pearson)</h2>
+                    <p>
+                        Based in the UK, Lucy Pearson's blog covers a wide range of literary topics, including book reviews, literary travel, and author interviews. Her 
+                        blog is especially known for beautifully curated recommendations and a focus on literary fiction and memoirs.
+                    </p>
+                    <div class="blog_icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog_card">
+                <div class="blog_img">
+                    <img src="{% static 'blog_3.jpg' %}">
+                </div>
+                <div class="blog_tag">
+                    <h2>The Perpetual Page-Turner (Jamie C.)</h2>
+                    <p>
+                        Jamie’s blog combines book reviews with personal reflections on life, making it relatable and engaging. She covers various genres, 
+                        from YA and fantasy to contemporary fiction, and shares reading lists and bookish tips for every type of reader.
+                    </p>
+                    <div class="blog_icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <!--Footer-->
+
+    <footer>
+        <div class="footer_main">
+
+            <div class="tag">
+                <img src="{% static 'logo.png' %}">
+                <p>
+                    Join Booktopia and discover a smarter, more personalized way to enjoy books! Connect with fellow readers,
+                     explore tailored recommendations, and make every read unforgettable.
+                </p>
+
+            </div>
+
+            <div class="tag">
+                <h1>Quick Link</h1>
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Featured</a>
+                <a href="#">Arrivals</a>
+                <a href="#">Reviews</a>
+                <a href="#">Blog</a>
+                <a href="#">Login</a>
+                
+            </div>
+
+            <div class="tag">
+                <h1>Contact Info</h1>
+                <a href="#"><i class="fa-solid fa-phone"></i>+216 00000000</a>
+                <a href="#"><i class="fa-solid fa-phone"></i>+216 00000000</a>
+                <a href="#"><i class="fa-solid fa-envelope"></i>booktopia@gmail.com</a>
+                
+            </div>
+
+            <div class="tag">
+                <h1>Follow Us</h1>
+                <div class="social_link">
+                    <i class="fa-brands fa-facebook-f"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </div>
+                
+            </div>
+
+            <div class="tag">
+                <h1>Newsletter</h1>
+                <div class="search_bar">
+                    <input type="text" placeholder="You email id here">
+                    <button type="submit">Subscribe</button>
+                </div>                
+            </div>            
+            
+        </div>
+
+        <p class="end">Design By<span><i class="fa-solid fa-face-grin"></i> ISAMM</span></p>
+
+    </footer>
+
+
+
+
+
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('.featured_book_box').slick({
+            autoplay: true,          // Active la lecture automatique
+            autoplaySpeed: 2000,     // Définit la vitesse du défilement (en ms)
+            slidesToShow: 3,         // Nombre de livres affichés à la fois
+            slidesToScroll: 1,       // Nombre de livres défilant à la fois
+            dots: true,              // Affiche les points de navigation
+            arrows: true             // Affiche les flèches de navigation
+        });
+    });
+
+
+ </script> 
+ <script>
+    let index = 0;
+const booksContainer = document.querySelector('.featured_book_box');
+const totalBooks = document.querySelectorAll('.featured_book_card').length;
+
+function moveBooks() {
+    if (index >= totalBooks - 1) {
+        index = 0;
+    } else {
+        index++;
+    }
+    booksContainer.style.transform = `translateX(-${index * 25}%)`;
+}
+
+setInterval(moveBooks, 2000); // Défile tous les 2 secondes
+
+ </script> 
+ <script>
+    // Affichage du popup après 6 secondes
+window.onload = function() {
+    setTimeout(function() {
+        // Afficher le popup
+        document.getElementById('signup-popup').style.display = 'flex';
+        document.getElementById('signup-popup').classList.add('show');
+    }, 9000); // 9000 ms = 6 secondes
+};
+
+// Fermeture du popup lorsque l'utilisateur clique sur "x"
+document.getElementById('popup-close').addEventListener('click', function() {
+    closePopup();
+});
+
+// Fermeture du popup lorsque l'utilisateur clique sur "Annuler"
+document.getElementById('cancel-btn').addEventListener('click', function() {
+    closePopup();
+});
+
+// Action du bouton "S'inscrire"
+document.getElementById('signup-btn').addEventListener('click', function() {
+    // Redirige l'utilisateur vers la page d'inscription ou ouvre le formulaire d'inscription
+    window.location.href = "/signup"; // Remplace par ton URL d'inscription
+});
+
+// Fonction pour fermer le popup
+function closePopup() {
+    document.getElementById('signup-popup').style.display = 'none';
+    document.getElementById('signup-popup').classList.remove('show');
+}
+
+ </script> 
+ <script>
+    // Attendre 5 secondes après le chargement de la page
+window.addEventListener("load", function() {
+    setTimeout(function() {
+        const chatbot = document.getElementById("chatbot");
+        chatbot.style.display = "block"; // Afficher le chatbot
+    }, 5000); // 5 secondes
+
+    // Fonction pour fermer le chatbot
+    const closeButton = document.querySelector(".chatbot-close");
+    closeButton.addEventListener("click", function() {
+        const chatbot = document.getElementById("chatbot");
+        chatbot.style.display = "none"; // Masquer le chatbot
+    });
+});
+
+ </script>
+</body>
+</html>

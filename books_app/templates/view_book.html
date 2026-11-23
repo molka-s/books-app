@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }} - View Book</title>
+
+    <style>
+        /* Base styles */
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            color: #444;
+            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        header {
+            background-color: #1a202c;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+            width: 100%;
+            border-bottom: 5px solid #f1f1f1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        main {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 12px;
+            max-width: 960px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            color: #007bff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .book-info {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            font-size: 1.2em;
+            color: #555;
+            font-weight: 400;
+        }
+
+        .book-info strong {
+            color: #007bff;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 1.3em;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .error-message h3 {
+            font-size: 2.3em;
+        }
+
+        #pdf-container {
+            width: 100%;
+            height: 500px;
+            margin-top: 20px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        canvas {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Popup style */
+        .notification-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        .notification-popup button {
+            background-color: #122f4f;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .notification-popup button:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            background-color: #083c74;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Show the popup */
+        .show-popup {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <header>
+            <h1>{{ book.title }}</h1>
+        </header>
+
+        {% if file_exists %}
+            <!-- Container for rendering the PDF -->
+            <div id="pdf-container"></div>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+            <script>
+                // The URL of the PDF
+                var url = "{% static pdf_path %}";
+
+                // Initialize PDF.js
+                pdfjsLib.getDocument(url).promise.then(function (pdf) {
+                    // Get the number of pages in the PDF
+                    var totalPages = pdf.numPages;
+
+                    // Function to render each page
+                    function renderPage(pageNum) {
+                        pdf.getPage(pageNum).then(function (page) {
+                            var scale = 1.2; // Scale for resizing the PDF
+                            var viewport = page.getViewport({ scale: scale });
+
+                            // Create a canvas element to render the PDF page
+                            var canvas = document.createElement('canvas');
+                            var context = canvas.getContext('2d');
+                            canvas.height = viewport.height;
+                            canvas.width = viewport.width;
+
+                            // Append the canvas to the PDF container
+                            document.getElementById('pdf-container').appendChild(canvas);
+
+                            // Render the page on the canvas
+                            page.render({
+                                canvasContext: context,
+                                viewport: viewport
+                            });
+                        });
+                    }
+
+                    // Render all pages
+                    for (var i = 1; i <= totalPages; i++) {
+                        renderPage(i);
+                    }
+
+                }).catch(function (error) {
+                    console.log("Error loading PDF: " + error);
+                });
+            </script>
+        {% else %}
+            <div class="error-message">
+                <h3>Oops!</h3>
+                <p>The book is not available in PDF format or the file is missing.</p>
+            </div>
+        {% endif %}
+
+        {% if not file_exists %}
+            <!-- Display Popup if user has run out of time -->
+            <div class="notification-popup show-popup">
+                <h3>You have run out of time allowed to access this book.</h3>
+                <button onclick="window.location.href='{% url 'books_app:page_rec' %}'" >Go Back to Home</button>
+            </div>
+        {% endif %}
+    </main>
+
+</body>
+</html>

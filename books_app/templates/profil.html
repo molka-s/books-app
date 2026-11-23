@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #a6a9b8, #073b4c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /*overflow: hidden;*/
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://source.unsplash.com/1600x900/?books') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(8px);
+        }
+
+        /* Logo */
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 15;
+        }
+
+        .logo-container img {
+            width: 150px;
+            height: auto;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Form container */
+        .form-container {
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            width: 50%;
+            height:auto;
+            margin-top:10px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .form-container .step {
+            display: none;
+        }
+
+        .form-container .step.active {
+            display: block;
+        }
+
+        /* Input group */
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label { 
+            font-size: 20px;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: block;
+            opacity: 0.7;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            background-color: #72808e;
+            color: #fff;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            background-color: #34495e;
+            box-shadow: 0 0 8px 2px #67b8ff;
+            outline: none;
+        }
+
+        .input-group textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 3px;
+            transition: background-color 0.3s ease;
+        }
+
+        .progress-bar .active {
+            background-color: #67b8ff;
+        }
+
+        /* Button */
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #073b4c;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #c6d1da;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            background-color: #073b4c;
+            transform: translateY(2px);
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .form-container {
+                width: 90%;
+                padding: 30px;
+            }
+
+            .form-container h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Pop-up styles */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 20;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .popup-content p {
+            font-size: 16px;
+        }
+
+        .popup-content button {
+            margin-top: 10px;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <!-- Logo -->
+    <div class="logo-container">
+        <img src="{% static 'logo.png' %}" alt="Logo">
+    </div>
+
+    <div class="form-container">
+        <h1>Add a Book</h1>
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <span class="step-indicator active"></span>
+            <span class="step-indicator"></span>
+        </div>
+
+        <!-- profil.html -->
+<form id="bookForm" method="post" action="{% url 'books_app:profil_view' %}" onsubmit="return validateForm(event)" enctype="multipart/form-data" >
+    {% csrf_token %}
+    
+    <!-- Step 1: Book Details -->
+    <div class="step active" id="step1">
+        <div class="input-group">
+            <label for="isbn">ISBN</label>
+            <input type="text" id="isbn" name="isbn" placeholder="Enter ISBN" required>
+        </div>
+        <div class="input-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" placeholder="Enter book title" required>
+        </div>
+        <div class="input-group">
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" placeholder="Enter author's name" required>
+        </div>
+        <div class="input-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Enter book description" required></textarea>
+        </div>
+        <div class="input-group">
+            <label for="pub_year">Publication Year</label>
+            <input type="number" id="pub_year" name="pub_year" placeholder="Enter publication year" required>
+        </div>
+        <button type="button" class="btn" id="next1">Next</button>
+    </div>
+
+    <!-- Step 2: Description and Genre -->
+<div class="step" id="step2">
+    <div class="input-group">
+        <label for="cover_img">Cover Image URL</label>
+        <input type="url" id="cover_img" name="cover_img" placeholder="Enter cover image URL">
+    </div>
+    <div class="input-group">
+        <label for="category" style="color: #fff;">Genres</label>
+        <div class="checkbox-group" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;margin-left:20px;margin-right:20px;">
+            {% for value, label in book_genre_choices %}
+            <div style="display: flex; align-items: center; white-space: nowrap;">
+                <label style="font-size: 14px; color: #fff; display: flex; align-items: center;">
+                    <input type="checkbox" name="genre" value="{{ value }}" style="margin-right: 10px;"> 
+                    {{ label }}
+                </label>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    
+    
+    <div class="input-group">
+        <label for="pdf_version">Upload PDF Version</label>
+        <input type="file" id="pdf_version" name="pdf_version" required>
+    </div>
+    <div class="input-group">
+        <label for="language">Language</label>
+        <select id="language" name="language" required>
+            <option value="" disabled selected>Select Language</option>
+            <option value="arabic">Arabic</option>
+            <option value="french">French</option>
+            <option value="english">English</option>
+        </select>
+    </div>
+    
+    <div class="input-group">
+        <label for="period">Period (in days)</label>
+        <input type="number" id="period" name="period" placeholder="Enter period" required>
+    </div>
+    <button type="submit" class="btn">Add Book</button>
+</div>
+
+</form>
+
+<!-- Pop-up HTML -->
+<div id="popup" class="popup" style="display: none;">
+    <div class="popup-content">
+        <p id="popup-message">{{ popup_message }}</p>
+        <button id="close-popup" class="btn">Close</button>
+    </div>
+</div>
+
+    <script>
+        // Fonction de validation
+        function validateForm(event) {
+            const isbn = document.getElementById('isbn').value;
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const description = document.getElementById('description').value;
+            const pubYear = document.getElementById('pub_year').value;
+            const genre = document.getElementById('category').value;
+
+            // Valider l'ISBN
+            const isbnRegex = /^(97(8|9))?\d{9}(\d|X)$/;
+            if (!isbnRegex.test(isbn)) {
+                alert('Please enter a valid ISBN number.');
+                event.preventDefault();
+                return false;
+            }
+
+            return true; // Passe à l'étape suivante si tout est validé
+        }
+
+        document.getElementById('next1').addEventListener('click', function () {
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            const stepIndicators = document.querySelectorAll('.step-indicator');
+
+            step1.classList.remove('active');
+            step2.classList.add('active');
+            stepIndicators[0].classList.remove('active');
+            stepIndicators[1].classList.add('active');
+        });
+
+        document.getElementById('close-popup').addEventListener('click', function () {
+            document.getElementById('popup').style.display = 'none';
+        });
+    </script>
+    <script>document.getElementById('category').addEventListener('change', function () {
+        const selectedGenres = Array.from(this.selectedOptions).map(option => option.text).join(', ');
+        console.log('Selected Genres:', selectedGenres); // Optionnel, pour déboguer
+    });
+    </script>
+</body>
+</html>

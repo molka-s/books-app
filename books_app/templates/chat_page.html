@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+
+    <title>Chat</title>
+    {% load static %}
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Root variables */
+:root {
+    --primary-color: #55588B;
+    --second-color: rgba(128, 128, 128, 0.5); /* Semi-transparent grey */
+    --third-color: #63737c;
+    --chat-color: #332F54;
+    --profile-color: #fdc381;
+    --font-family: "Cabin", sans-serif;
+}
+
+/* General styles for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    position: relative;
+}
+
+/* Body styles */
+body {
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 0 5%;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button,
+input {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+i {
+    font-size: 26px;
+    cursor: pointer;
+}
+
+i:hover {
+    filter: brightness(2);
+}
+
+.logo-icon,
+.search-icon {
+    color: #92c5f8 !important;
+}
+
+.chat-icon {
+    color: var(--third-color);
+}
+
+/* Main container styles */
+.main-container {
+    max-width: 1380px;
+    width: 100%;
+    min-height: 90vh;
+    height: 100%;
+    background:#136079;
+    border-radius: 25px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    border: 5px solid #E2D3F4;
+    box-shadow: 0px 0px 25px var(--third-color);
+}
+
+/* Navbar styles */
+.navbar {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 4%;
+}
+
+.nav-left,
+.nav-right {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.main-logo {
+    width: 120px;
+}
+
+.search-bar {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: flex-start;
+    background: white;
+    padding: 8px 8px 8px 13px;
+    border-radius: 8px;
+}
+
+.search-bar img {
+    width: 22px;
+    height: 22px;
+}
+
+.search-bar input {
+    width: 100%;
+    font-size: 17px;
+    font-weight: 400;
+    padding-left: 12px;
+    color: var(--chat-color)
+}
+
+.setting {
+    width: 30px;
+}
+
+.profile-link {
+    position: relative;
+}
+
+.profile-link img {
+    width: 40px;
+    border-radius: 50%;
+    border: 3px solid var(--profile-color);
+}
+
+.profile-link::after {
+    content: '';
+    width: 13px;
+    height: 13px;
+    background: greenyellow;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+}
+
+/* Bottom section styles */
+.bottom-sec {
+    width: 100%;
+    height: 76.5vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0 4% 20px 4%;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.side-menu {
+    width: 370px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.side-menu::-webkit-scrollbar {
+    display: none;
+}
+
+.side-menu ul {
+    list-style-type: none;
+    background: #1e728e;
+    padding: 40px 20px 20px 20px;
+    border-radius: 20px;
+}
+
+.side-menu ul li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.side-menu ul li:first-child {
+    margin-top: 0;
+}
+
+.side-menu ul li img {
+    width: 20px;
+}
+
+.side-menu ul li a {
+    text-decoration: none;
+    color: #E2D3F4;
+    font-weight: 500;
+    font-size: 10px;
+    transition: 0.4s;
+}
+
+.side-menu ul li a:hover,
+.side-menu ul li .active-link {
+    color: #fff;
+}
+
+.contacts {
+    width: 100%;
+    height: fit-content;
+    margin-top: 20px;
+}
+
+/* Chat item styles */
+.chat {
+    width: 100%;
+    display: flex;
+    align-items: center; /* Vertically align items to the center */
+    gap: 12px;
+    margin: 10px 0;
+    background: #29a3cc;
+    padding: 10px 10px;
+    border-radius: 15px;
+    transition: 0.4s;
+}
+
+.chat img {
+    width: 50px;
+    border-radius: 50%;
+    border: 1px solid white;
+
+}
+
+.chat p {
+    font-size: 13px;
+    color: white;
+    font-weight: 500;
+    transition: 0.4s;
+    display: inline-block; /* Ensure the paragraph doesn't break into a new line */
+    margin: 0; /* Remove any default margin that might cause spacing issues */
+}
+
+.chat a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+
+
+
+.chat:hover {
+    background: #E2D3F4;
+}
+
+.chat:hover p {
+    color: var(--chat-color)
+}
+
+.contactstion {
+    flex-grow: 1;
+    height: 100%;
+    background: #29a3cc;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.chat-header {
+    width: 100%;
+    height: fit-content;
+    padding: 10px 4% 5px 4%;
+    border-bottom: 2px solid #186077;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Profile link header styles */
+.profile-link-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-link-header .profile-link-main img {
+    width: 50px;
+    border-radius: 50%;
+    border: 3px solid rgb(14, 31, 93);
+}
+
+.profile-link-main {
+    position: relative;
+}
+
+.profile-link-main::after {
+    content: '';
+    width: 13px;
+    height: 13px;
+    background: rgb(14, 31, 93);
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    z-index: 20;
+}
+
+.profile-link-header h2 {
+    margin-top: -8px;
+    color: #E2D3F4;
+}
+
+/* Input area styles */
+.input-area {
+    width: 100%;
+    height: 65px;
+    border-top: 2px solid #29a3cc;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    padding: 12px 4%;
+    background-color: rgba(255, 255, 255, 0.5); /* 0.5 is the opacity level */
+}
+
+.input-area img {
+    width: 25px;
+}
+
+.message-input-form {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    border: 2px solid #29a3cc;
+    padding: 10px 15px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.5); /* 0.5 is the opacity level */
+}
+
+.message-input-form input {
+    flex-grow: 1;
+    font-size: 16px;
+    color: #29a3cc;
+}
+
+.message-input-form input::placeholder {
+    color: #29a3cc;
+}
+
+/* All chat container styles */
+.all-chat {
+    width: 100%;
+    height: 72%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 20px 4% 65px 4%;
+}
+
+.all-chat::-webkit-scrollbar {
+    display: none;
+}
+
+.message-item {
+    width: 60%;
+    height: fit-content;
+    background:#61aec8;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 15px;
+    border-radius: 15px;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.message-item img {
+    width: 40px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.message-content h4 {
+    color:#1e596c;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.message-content p {
+    color: white;
+}
+
+.my-message {
+    margin-left: 40%;
+    background: var(--second-color);
+}
+
+.message-content h4 span {
+    color: #E2D3F4;
+}
+
+.menu-btn {
+    display: none;
+}
+
+.menu-btn img {
+    width: 27px;
+}
+
+.side-menu .search-bar {
+    display: none;
+}
+
+
+</style>    
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="navbar">
+            <!-- Navigation and Search bar -->
+            <div class="nav-left">
+                <i class="ri-chat-smile-fill logo-icon"></i> Chat
+            </div>
+            <div class="nav-right">
+                <form class="search-bar">
+                    <i class="ri-search-line search-icon"></i>
+                    <input type="text" name="" placeholder="Search here...">
+                </form>
+                <i class="ri-settings-3-fill" class="setting" style="color:rgb(14, 31, 93);"></i>
+            </div>
+        </div>
+    
+        <div class="bottom-sec">
+            <!-- Sidebar with user's groups -->
+            <div class="side-menu" id="SideMenu">
+                <div class="contacts">
+                    <h4 style="color: white;">My Groups</h4>
+            {% for group in user_groups %}
+            <div class="chat">
+                <img src="https://cdn3.iconfinder.com/data/icons/seo-services-icons-pack1-1/128/SOCIAL_ENGAGEMENT-512.png" alt="" />
+                <p>
+                    <a href="{% url 'books_app:chat_page' group.name %}">
+                        {{ group.name }}
+                        {% if group.unread_count > 0 %}
+                        <span style="background-color: red; width: 9px; height: 9px; border-radius: 50%; display: inline-block;margin-left: 5px;"></span>
+                        {% endif %}
+                    </a>
+                </p>
+            </div>
+            {% endfor %}
+                </div>
+            </div>
+        
+    
+            <!-- Chat area -->
+            <div class="contactstion">
+                <div class="chat-header">
+                    <div class="profile-link-header">
+                        {% if selected_group %}
+                        <span class="profile-link-main">
+                            <img src="images/photo-1.jpg" alt="" />
+                        </span>
+                        <h2>{{ selected_group.name }}</h2>
+                        {% else %}
+                        <h2>Select a group chat...</h2>
+                        {% endif %}
+                    </div>
+                    <i class="ri-more-2-fill"></i>
+                </div>
+    
+                <div class="all-chat">
+                    {% if selected_group %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="message-item {% if message.user == request.user %}my-message{% endif %}">
+                                    <!-- Profile Image of the User -->
+                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="User Profile Picture" />
+                                    <div class="message-content">
+                                        <h4>{{ message.user.username }} <span style="font-size: 10px;">  {{ message.timestamp|date:"H:i" }}</span></h4>
+                                        <p>{{ message.message }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>Be the first to send a message!</p>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+    
+                <!-- Message Input -->
+            <div class="input-area">
+                <i class="ri-add-circle-line chat-icon" style="color:#29a3cc;"></i>
+                <form method="POST" class="message-input-form">
+                    {% csrf_token %}
+                    <input type="text" name="message" id="messageInput" placeholder="Enter Message..." required />
+                    <i class="ri-emoji-sticker-fill chat-icon" style="color:#29a3cc;"></i>
+                    <i class="ri-attachment-2 chat-icon"style="color:#29a3cc;" ></i>
+                    <button type="submit" class="send-button">
+                        <i class="ri-send-plane-2-fill chat-icon" style="color:#29a3cc;" ></i>
+                    </button>
+                </form>
+            </div>
+    
+            </div>
+    
+        </div>
+    </div>
+    <script>
+        // Function to scroll the chat to the bottom
+        function scrollToBottom() {
+            var chatContainer = document.getElementById('chat-container');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Scroll to the bottom when the page loads
+        window.onload = function() {
+            scrollToBottom();
+        };
+
+        // Handle the form submission without refreshing the page
+        document.getElementById('message-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Send the message using an AJAX request
+            var formData = new FormData(this);
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+            }).then(response => {
+                if (response.ok) {
+                    // Clear the input field after submitting
+                    document.getElementById('messageInput').value = '';
+                    // Scroll to the bottom after submitting
+                    scrollToBottom();
+                } else {
+                    console.error('Failed to send message');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+
+</html>

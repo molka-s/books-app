@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    {% load static %}
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #2f2f2f;
+  --text-dark: #18181b;
+  --text-light: #71717a;
+  --white: #ffffff;
+  --max-width: 1200px;
+  --header-font: "Lora", serif;
+}
+
+* {  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.section__container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 5rem 1rem;
+}
+
+.section__header {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: var(--header-font);
+  color:#073b4c;
+}
+
+.section__subheader {
+  color: var(--text-light);
+}
+
+.btn {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  color: var(--white);
+  background-color: var(--primary-color);
+  border-radius: 5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: var(--text-dark);
+}
+
+img {
+  display: flex;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+header {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url("{% static 'books_cover.jpg' %}");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+header span {
+  color:#073b4c;
+  font-weight: bolder;
+
+}
+nav {
+  max-width:80%;
+  margin: auto;
+  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav__logo {
+  flex: 1;
+}
+
+.nav__logo a {
+  font-size: 2rem;
+  font-weight: bolder;
+  font-family: var(--header-font);
+  color: #166b87;
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+
+.link a {
+  position: relative;
+  padding: 10px 0;
+  color: var(--white);
+  transition: 0.3s;
+}
+
+.link a::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2px;
+  width: 0;
+  background-color: var(--white);
+  transition: 0.3s;
+}
+
+.link a:hover::after {
+  width: 100%;
+}
+
+.nav__menu__btn {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--white);
+}
+
+.nav__actions {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
+.nav__actions span {
+  font-size: 1.5rem;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.nav__actions span a{
+  text-decoration: none;
+  color: var(--white);
+}
+
+.nav__actions span a:hover{
+  color: #073b4c;
+}
+
+
+.header__container {
+  margin-top: 0;
+  text-align: center;
+  color: var(--white);
+}
+
+.header__container h1 {
+  margin-bottom: 1rem;
+  font-size: 4.5rem;
+  font-weight: 600;
+  font-family: var(--header-font);
+}
+
+.header__container p {
+  max-width: 600px;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+  font-size: 1.2rem;
+}
+
+.header__container form {
+  width: 100%;
+  max-width: 500px;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+  padding-block: 0.25rem;
+  padding-inline: 1.25rem 0.25rem;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--white);
+  border-radius: 5rem;
+}
+
+.header__container input {
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--white);
+  background-color: transparent;
+}
+
+.header__container input::placeholder {
+  color: var(--white);
+}
+
+.header__container button {
+  padding: 11px 12px;
+  font-size: 1.25rem;
+  outline: none;
+  border: none;
+  color: var(--white);
+  background-color: #073b4c;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.header__container a {
+  display: inline-block;
+  padding: 0 12px;
+  font-size: 3rem;
+  color: var(--white);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--white);
+  border-radius: 100%;
+}
+
+
+.offer__container {
+  padding-block: 5rem;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, var(--max-width))
+    minmax(0, 1fr);
+  row-gap: 2rem;
+}
+
+.offer__grid__top {
+  margin-left: 50px;
+  grid-column: 1/3;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.offer__container img {
+  border-radius:20px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.offer__content {
+  margin-right: 0;
+}
+
+.offer__content .section__subheader {
+  margin-bottom: 1rem;
+}
+
+.craft__container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+
+.craft__container .section__subheader {
+  margin-bottom: 2rem;
+}
+
+.craft__image {
+  width:auto ;
+  height:auto;
+  position: relative;
+  isolation: isolate;
+}
+
+.craft__image::before {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: #ebf1f1;
+  border-radius: 15px;
+  transition: 0.3s;
+  z-index: -1;
+}
+
+.craft__image:hover::before {
+  height: 80%;
+}
+
+.craft__image__content {
+  padding: 17px;
+  border-radius: 10px;
+  padding-bottom: 2rem;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.craft__image__content img {
+  margin-bottom: 1rem;
+  max-width: 250px;
+  margin: auto;
+}
+
+.craft__image__content p {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #71717a;
+}
+
+.craft__image__content h4 {
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-weight: 600;
+  color: #073b4c;
+}
+
+.craft__image:hover .craft__image__content {
+  transform: translateY(-2rem);
+}
+
+.craft__image a {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translate(-50%, 50%);
+  padding: 0 7px;
+  font-size: 1.75rem;
+  color: var(--white);
+  background-color: #073b4c;
+  border-radius: 100%;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.craft__image a button {
+  font-size: 0.8rem;
+  padding: 0.5rem;
+  width: 100%;
+background-color: #073b4c;
+}
+
+
+.craft__image:hover a {
+  opacity: 1;
+}
+
+
+.footer {
+  background-color:#073b4c;
+}
+
+.footer__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5rem;
+  align-items: center;
+  border-bottom: 1px solid var(--white);
+}
+
+.footer__content h4 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 2.5rem;
+  color: var(--white);
+}
+
+.footer__content p {
+  color: var(--white);
+}
+
+.footer__form form {
+  width: 100%;
+  max-width: 600px;
+  margin-inline: auto;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--white);
+  border-radius: 10px;
+}
+
+.footer__form input {
+  width: 100%;
+  padding: 0 1rem;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+}
+
+.footer__form button {
+  padding: 1rem 1.5rem;
+  outline: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--white);
+  background-color: #073b4c;
+  border-radius: 5px;
+}
+
+.footer__bar {
+  padding-block: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer__logo h4 a {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: var(--header-font);
+  color: var(--white);
+}
+
+.footer__logo p {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: var(--white);
+}
+
+.footer__nav {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer__link a {
+  font-weight: 500;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+@media (width < 1200px) {
+  .offer__container {
+    row-gap: 1rem;
+  }
+
+  .offer__grid__top,
+  .offer__grid__bottom {
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .offer__grid__top img:first-child,
+  .offer__grid__bottom img:first-child {
+    display: none;
+  }
+
+  .craft__container {
+    gap: 1rem;
+  }
+}
+
+@media (width < 900px) {
+  .nav__actions {
+    display: none;
+  }
+
+  .choose__container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .choose__container .choose__bg {
+    left: 0;
+    transform: translateX(0);
+  }
+
+  .choose__image {
+    grid-area: 1/1/2/2;
+  }
+
+  .offer__grid__top,
+  .offer__grid__bottom {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .offer__grid__top img:nth-child(2),
+  .offer__grid__bottom img:nth-child(4) {
+    display: none;
+  }
+
+  .craft__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modern__container {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 4rem;
+  }
+
+  .blog__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .footer__container {
+    grid-template-columns: repeat(1, 1fr);
+    text-align: center;
+  }
+}
+
+@media (width < 600px) {
+  nav {
+    position: fixed;
+    width: 100%;
+    padding: 1rem;
+    background-color: #000000;
+    z-index: 99;
+  }
+
+  .nav__links {
+    position: absolute;
+    left: 0;
+    top: 68px;
+    padding: 2rem;
+    width: 100%;
+    flex-direction: column;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: 0.5s;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+
+  .nav__links .link a {
+    opacity: 0;
+  }
+
+  .nav__links.open .link a {
+    opacity: 1;
+  }
+
+  .nav__links.open {
+    transform: scaleY(1);
+  }
+
+  .nav__menu__btn {
+    display: block;
+  }
+
+  .header__container h1 {
+    margin-top: 4rem;
+    font-size: 3.5rem;
+  }
+
+  .offer__grid__top,
+  .offer__grid__bottom {
+    padding-inline: 1rem;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .blog__grid {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 2rem;
+  }
+
+  .footer__bar {
+    flex-direction: column;
+  }
+}
+
+/* Conteneur principal du carrousel */
+.book-carousel-container {
+    width: 95%;
+    margin: 4rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Titre du carrousel */
+.book-carousel-container h2 {
+    font-size: 2rem; /* Taille du texte réduite */
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    
+    letter-spacing: 1px;
+}
+
+/* Conteneur du carrousel */
+.carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Conteneur des diapositives */
+.carousel-track-container {
+    overflow: hidden;
+    width: 100%;
+    padding: 0 15px;
+    padding-left: 1px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 1.5rem;
+}
+
+/* Diapositive individuelle */
+.carousel-slide {
+    flex: 0 0 auto;
+    min-width: 250px;
+    max-width: 250px;
+    background-color: #f8f8f8;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #e0e0e0;
+}
+
+.carousel-slide:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+    filter: brightness(1.1);
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.carousel-slide:hover img {
+    transform: scale(1.05);
+}
+
+.carousel-slide p {
+    padding: 1rem;
+    color: #555;
+    font-size: 0.9rem; /* Taille du texte réduite */
+    line-height: 1.4;
+}
+
+/* Liens pour les titres */
+.carousel-slide a {
+    text-decoration: none;
+    font-size: 1.1rem; /* Taille du texte réduite */
+    color: #2c3e50;
+    font-weight: 500;
+    display: block;
+    margin: 10px 0;
+    transition: color 0.3s;
+}
+
+.carousel-slide a:hover {
+    color: #3498db;
+}
+
+/* Boutons de navigation */
+button.prev,
+button.next {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.3rem; /* Taille du texte réduite */
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    padding-left: 1px;
+}
+
+button.prev {
+    left: 1px;
+}
+
+button.next {
+    right: 1px;
+}
+
+button.prev:hover,
+button.next:hover {
+    background-color: #2980b9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+button.prev:focus,
+button.next:focus {
+    outline: none;
+    border: 2px solid #2980b9;
+}
+
+/* Style du placeholder de message */
+.book-carousel-container p {
+    font-size: 1rem; /* Taille du texte réduite */
+    color: #777;
+    margin: 2rem 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .carousel-slide {
+        min-width: 220px;
+        max-width: 220px;
+    }
+
+    button.prev,
+    button.next {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem; /* Taille du texte réduite */
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-slide {
+        min-width: 180px;
+        max-width: 180px;
+    }
+
+    button.prev,
+    button.next {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem; /* Taille du texte réduite */
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-slide {
+        min-width: 150px;
+        max-width: 150px;
+    }
+
+    button.prev,
+    button.next {
+        width: 35px;
+        height: 35px;
+        font-size: 0.5rem; /* Taille du texte réduite */
+    }
+
+    .book-carousel-container h2 {
+        font-size: 1.5rem; /* Taille du texte réduite */
+    }
+}
+
+
+.category-name{
+  background-color: #389b2f;
+    position: absolute;
+    top: 10px;
+    left:10px;
+    font-size: 13px;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 2px;
+}
+
+
+.not-available {
+    background-color: red;
+}
+
+/* Styling for the "Currently Reading" Section */
+.currently-reading-section {
+    margin-right: 100px;
+    margin-left: 100px;
+    width: auto;
+    margin-top: 40px;
+    padding: 20px;
+    background-color:beige;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.currently-reading-section h3 {
+  margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color:#084c63;
+    margin-bottom: 20px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.currently-reading-list {
+    list-style-type: none;
+    padding: 0;
+    width: auto;
+    display: flex;
+    flex-wrap: nowrap; /* Ensures items stay on a single line */
+    justify-content: space-around;
+    gap: 5px; 
+    overflow-x: auto; /* Allows horizontal scrolling if needed */
+}
+
+.book-item {
+    background-color: #ffffff;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    padding: 8px; /* Reduced padding inside the item */
+    flex-direction: column;
+    align-items: center;
+    height: 370px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.book-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.book-cover {
+    width: 120px;
+    height: 180px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.book-item h4 {
+    font-size: 18px;
+    color: #495057;
+    margin: 0;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.book-item p {
+    font-size: 14px;
+    color: #6c757d;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.book-item strong {
+    color: #28a745;
+}
+
+.book-item a.btn {
+    background-color:#073b4c;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.book-item a.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .book-item {
+        width: calc(50% - 10px);  /* 2 books per row on smaller devices */
+    }
+}
+
+@media (max-width: 480px) {
+    .book-item {
+        width: 100%;  /* 1 book per row on very small screens */
+    }
+}
+
+.icon-button {
+  margin-right: 25px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  color: #333333;
+  background: #dddddd;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  font-size: 20px; /* Adjust icon size here */
+}
+
+.icon-button:hover {
+  cursor: pointer;
+}
+
+.icon-button:active {
+  background: #cccccc;
+}
+
+.icon-button__badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 25px;
+  height: 25px;
+  background: red;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.icon-img {
+  width: 25px; /* Icon size */
+  height: 25px; /* Icon size */
+}
+
+/* Notification Popup */
+.notification-popup {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 80px;
+  width: 400px;
+  padding: 15px;
+  height: 400px;
+  background-color: #fff; /* White background */
+  border: 1px solid #ddd; /* Lighter border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+  z-index: 9999;
+  font-family: 'Arial', sans-serif; /* More readable font */
+  font-size: 14px;
+  color: #333; /* Dark text for readability */
+  animation: fadeIn 0.3s ease-out;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+/* Show notification popup */
+.notification-popup.show {
+  display: block;
+}
+
+/* Notification list style */
+.notification-popup ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual notification item */
+.notification-popup li span{
+  color:black; /* Slightly darker text */
+  margin-bottom: 10px;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+.notification-popup li {
+  background-color: rgb(227, 222, 222);
+  border-bottom: 1px solid #f1f1f1;
+  border-radius: 5px;
+  padding: 12px 15px;
+
+}
+/* Hover effect on notification items */
+.notification-popup li:hover {
+  cursor: pointer;
+}
+
+/* Green color for successful notifications */
+.notification-text {
+  color: #28a745; /* Green for positive notifications */
+}
+
+/* No notifications available text */
+.notification-popup p {
+  text-align: center;
+  font-size: 16px;
+  padding: 15px;
+  font-style: italic;
+  background-color: #fafafa;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* Animation for fading in the notification popup */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.green-text {
+color: black;
+font-size: 15px;
+}
+
+
+.btn {
+  background-color: #073b4c;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+.borrowed-notification .username {
+    color:#073b4c;
+}
+
+.borrowed-notification .book-title {
+    color:#0056b3;
+}
+
+.borrowed-notification .start-date {
+    color:#2c3e50;
+}
+
+.end-date-notification {
+    color: red; /* Make the whole notification red */
+}
+
+.end-date-notification .book-title , .end-date-notification .end-date{
+    font-weight: bold;
+    color: red; /* Make the whole notification red */
+    /* Additional styling for the book title */
+}
+
+.available-notification .book-title {
+  color:#18762e;
+}
+.available-notification{
+  color:#18762e;
+}
+
+/* General styling for all types */
+.notification-popup {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.notification-popup ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.notification-popup li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+/* Style for the warning icon in the end date notification */
+.end-date-notification .warning-icon {
+    color: red; /* Red color for the warning icon */
+    margin-right: 10px; /* Space between the icon and the text */
+    vertical-align: middle; /* Align the icon vertically with the text */
+    font-size: 18px; /* Adjust the size of the icon */
+}
+.green-dot {
+    width: 7px; /* Size of the dot */
+    height: 7px; /* Size of the dot */
+    background-color: rgb(11, 163, 11); /* Green color */
+    border-radius: 50%; /* Make it circular */
+    display: inline-block; /* Align it next to the text */
+    margin-right: 10px; /* Space between the dot and the text */
+    vertical-align: middle; /* Vertically align the dot with the text */
+}
+/* Style for the warning icon in the end date notification */
+.new-publisher-book-notification {
+    color:#073b4c; /* Red color for the warning icon */
+
+}
+/* Style for the warning icon in the end date notification */
+.new-publisher-book-notification .username {
+    color:#136079; /* Red color for the warning icon */
+
+}
+/* Style for the warning icon in the end date notification */
+.new-publisher-book-notification .book-title {
+    color:#136079; /* Red color for the warning icon */
+
+}
+.blue-dot {
+    width: 7px; /* Size of the dot */
+    height: 7px; /* Size of the dot */
+    background-color: #136079; /* Green color */
+    border-radius: 50%; /* Make it circular */
+    display: inline-block; /* Align it next to the text */
+    margin-right: 10px; /* Space between the dot and the text */
+    vertical-align: middle; /* Vertically align the dot with the text */
+}
+/* Style for the warning icon in the end date notification */
+.new-author-book-notification {
+    color:#197d9f; /* Red color for the warning icon */
+
+}
+/* Style for the warning icon in the end date notification */
+.new-author-book-notification .username {
+    color:#2285a7; /* Red color for the warning icon */
+
+}
+/* Style for the warning icon in the end date notification */
+.new-author-book-notification .book-title {
+  color:#2285a7; /* Red color for the warning icon */
+
+}
+.blue-dot2 {
+    width: 7px; /* Size of the dot */
+    height: 7px; /* Size of the dot */
+    background-color: #2285a7; /* Green color */
+    border-radius: 50%; /* Make it circular */
+    display: inline-block; /* Align it next to the text */
+    margin-right: 10px; /* Space between the dot and the text */
+    vertical-align: middle; /* Vertically align the dot with the text */
+}
+/* Section Container */
+.recommended-groups-section {
+    padding: 15px;
+    background-color: beige;
+    border-radius: 10px;
+    max-width: 1300px;
+    margin: 20px auto ;
+    padding: 40px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e1e1e1;
+}
+
+/* Section Heading */
+.recommended-groups-section h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #0e1f5d;
+    margin-bottom: 25px;
+}
+
+.recommended-groups-section h2 i {
+    margin-right: 10px;
+    color: #1f3eaf;
+}
+
+/* Grid Layout for the list */
+.recommended-groups-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+/* List Styling */
+.recommended-groups-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 45%; /* Ensures each list takes up 45% of the container */
+}
+
+.group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    transition: transform 0.3s ease;
+    position: relative;
+    border-left: 5px solid #1f3eaf;
+}
+
+/* Hover Effect for Group Item */
+.group-item:hover {
+    transform: translateY(-3px);
+}
+
+/* Group Info (Name and Icon) */
+.group-info {
+    display: flex;
+    align-items: center;
+}
+
+.group-icon {
+    font-size: 18px;
+    color:#1f3eaf;
+    margin-right: 10px;
+}
+
+.group-info .group-name {
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+}
+
+/* Join Button */
+.join-button {
+    background-color:#073b4c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.join-button:hover {
+    background-color:#073b4c;
+}
+
+/* Button link styling */
+.join-button a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* Style pour le conteneur principal */
+.certificate-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: linear-gradient(135deg, #ff9a8b, #335d6b, #564c4e); /* Dégradé festif */
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Style de la boîte contenant le message */
+.message-box {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px 50px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 550px;
+  position: relative;
+  animation: fadeInUp 1s ease-out;
+}
+
+/* Titre principal */
+.congratulations-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.8em;
+  font-weight: 700;
+  color: #0c3b4b; /* Orange vif */
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  animation: textFadeIn 1.5s ease-in-out;
+}
+
+/* Message de félicitations */
+.congratulation-message {
+  font-size: 1.2em;
+  color: #555;
+  font-family: 'Lora', serif;
+  margin-bottom: 30px;
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+}
+
+/* Bouton de téléchargement */
+.download-btn {
+  font-size: 1.1em;
+  font-family: 'Poppins', sans-serif;
+  padding: 15px 35px;
+  background-color: #0c3b4b; /* Orange vif */
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.download-btn:hover {
+  background-color: #69554e; /* Couleur plus foncée */
+  transform: translateY(-3px); /* Effet de levée au survol */
+}
+
+/* Animation du texte */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation du titre */
+@keyframes textFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Style des confettis */
+.confetti-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Pour que les confettis ne bloquent pas l'interaction avec les autres éléments */
+  z-index: 0;
+}
+
+.confetti {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #ff6347; /* Couleur rouge vif */
+  border-radius: 50%;
+  animation: fall 3s linear infinite;
+  opacity: 0.9;
+}
+
+/* Animation des confettis - Plus rapide, plus varié */
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Ajouter des variations pour les confettis */
+.confetti:nth-child(1) {
+  top: 10%;
+  left: 15%;
+  width: 16px;
+  height: 16px;
+  background-color: #ff6347; /* Rouge vif */
+  animation-duration: 4s;
+  animation-delay: 0.2s;
+}
+
+.confetti:nth-child(2) {
+  top: 20%;
+  left: 30%;
+  width: 10px;
+  height: 10px;
+  background-color: #ffd700; /* Jaune vif */
+  animation-duration: 2.5s;
+  animation-delay: 0.5s;
+}
+
+.confetti:nth-child(3) {
+  top: 5%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  background-color: #32cd32; /* Vert vif */
+  animation-duration: 3s;
+  animation-delay: 0.8s;
+}
+
+.confetti:nth-child(4) {
+  top: 15%;
+  left: 70%;
+  width: 12px;
+  height: 12px;
+  background-color: #00bfff; /* Bleu vif */
+  animation-duration: 3s;
+  animation-delay: 1s;
+}
+
+.confetti:nth-child(5) {
+  top: 25%;
+  left: 80%;
+  width: 10px;
+  height: 10px;
+  background-color: #ff69b4; /* Rose vif */
+  animation-duration: 3.2s;
+  animation-delay: 1.3s;
+}
+
+.confetti:nth-child(6) {
+  top: 35%;
+  left: 90%;
+  width: 18px;
+  height: 18px;
+  background-color: #8a2be2; /* Violet */
+  animation-duration: 3.5s;
+  animation-delay: 1.6s;
+}
+
+.confetti:nth-child(7) {
+  top: 40%;
+  left: 40%;
+  width: 14px;
+  height: 14px;
+  background-color: #ff4500; /* Rouge clair */
+  animation-duration: 3.3s;
+  animation-delay: 1.9s;
+}
+
+.confetti:nth-child(8) {
+  top: 50%;
+  left: 60%;
+  width: 10px;
+  height: 10px;
+  background-color: #ffff00; /* Jaune */
+  animation-duration: 3.1s;
+  animation-delay: 2.1s;
+}
+
+.confetti:nth-child(9) {
+  top: 55%;
+  left: 20%;
+  width: 12px;
+  height: 12px;
+  background-color: #ff1493; /* Rose fuchsia */
+  animation-duration: 3s;
+  animation-delay: 2.3s;
+}
+
+.confetti:nth-child(10) {
+  top: 70%;
+  left: 80%;
+  width: 16px;
+  height: 16px;
+  background-color: #ff8c00; /* Orange */
+  animation-duration: 4s;
+  animation-delay: 2.7s;
+}
+
+
+
+
+
+</style>    
+<title>Booktopia</title>
+  </head>
+  <body>
+    <header class="header">
+      <nav>
+        <div class="nav__logo"><a href="#">BookTopia</a></div>
+        <ul class="nav__links" id="nav-links">
+          <li class="link"><a href="#home">Search</a></li>
+          <li class="link"><a href="#home">Categories</a></li>
+          <li class="link"><a href="#choose">New arrivals</a></li>
+          <li class="link"><a href="{% url 'books_app:statistics' %}">Statistics</a></li>
+        </ul>
+        <div class="nav__menu__btn" id="menu-btn">
+          <span><i class="ri-menu-line"></i></span>
+        </div>
+        <div class="nav__actions">
+          <!-- Notification Button -->
+          <button type="button" class="icon-button" onclick="toggleNotificationContent()">
+            <i class="ri-notification-3-fill"></i>
+            <span class="icon-button__badge" style="font-size: 15px;">
+              {{ notifications_count }}
+            </span>
+          </button>
+    
+          <div id="notificationPopup" class="notification-popup">
+            {% if notifications %}
+              <ul>
+                {% for notification in notifications %}
+                  <li class="{% if notification.type == 'borrowed' %}borrowed-notification{% elif notification.type == 'available' %}available-notification{% elif notification.type == 'end_date' %}end-date-notification{% elif notification.type == 'new_publisher_book' %}new-publisher-book-notification{% elif notification.type == 'new_author_book' %}new-author-book-notification{% endif %}">
+                    {% if notification.type == 'borrowed' %}
+                      <span class="green-dot"></span>
+                      Your posted book <span class="book-title">{{ notification.title }}</span> has been borrowed by <span class="username">{{ notification.username }}</span> on <span class="start-date">{{ notification.start_date }}</span>.
+                    {% elif notification.type == 'available' %}
+                      <span class="green-dot"></span>
+                      Your reserved book <span class="book-title">{{ notification.title }}</span> is now available!
+                      <a href="{% url 'books_app:borrow_book' notification.id %}">
+                        <i class="fas fa-arrow-right" style="color:#18762e;margin-left: 7px;"></i>
+                      </a>
+                    {% elif notification.type == 'end_date' %}
+                      <i class="fas fa-exclamation-triangle warning-icon"></i>
+                      Reminder: You need to finish reading <span class="book-title">{{ notification.title }}</span> before <span class="end-date">{{ notification.end_date }}</span>. Time is running out!
+                    {% elif notification.type == 'new_publisher_book' %}
+                      <span class="blue-dot"></span>
+                      The publisher <span class="username">{{ notification.username }}</span> has posted a new book: <span class="book-title">{{ notification.title }}</span>.
+                    {% elif notification.type == 'new_author_book' %}
+                      <span class="blue-dot2"></span>
+                      A new book by <span class="username">{{ notification.username }}</span> titled <span class="book-title">{{ notification.title }}</span> has been posted!
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p>No new notifications.</p>
+            {% endif %}
+          </div>
+    
+          <!-- Chat Button -->
+          <button type="button" class="icon-button">
+            <a href="{% url 'books_app:chat_page' %}">
+                <i class="ri-chat-3-fill" style="color: #262627;"></i>
+                <span class="icon-button__badge" style="font-size: 15px;">
+                        {{ unread_messages_count }}
+                </span>
+            </a>
+          </button>
+
+    
+          <!-- User Profile Button -->
+          <span><a href="{% url 'books_app:user_profile' %}"><i class="ri-user-fill"></i></a></span>
+        </div>
+    
+        <p class="link">
+          <a href="{% url 'books_app:logout_view' %}" style="margin-left: 60px;">
+            Logout <i class="ri-logout-box-r-line" style="margin-right: 5px;"></i>
+          </a>
+        </p>
+      </nav>    
+    
+      <div class="section__container header__container" id="home">
+        <h1>Discover a World of Books, Simplified & Organized</h1>
+        <p>
+          Welcome back <span> {{ name }} {{ surname }} </span> ! Browse and transform your reading experience with Booktopia any book quickly and easily, get personalized recommendations 
+          and organize your personal library effortlessly.
+        </p>
+        <form method="GET" action="{% url 'books_app:search_books' %}">
+          <input type="text" id="search-query" name="query" placeholder="Search books by title, genre, author ..." value="{{ request.GET.query }}" autocomplete="off" onkeyup="fetchAutocompleteSuggestions()" />
+          <button><i class="ri-search-line"></i></button>
+      </form>
+      </div>
+    </header>
+
+  
+  
+    <section class="offer__container" id="offer">
+      <div class="offer__grid__top">
+        <img src="{% static '1.png' %}" alt="offer" />
+        <img src="{% static '2.png' %}" alt="offer" />
+        <img src="{% static '3.png' %}" alt="offer" />
+        <div class="offer__content">
+          <h2 class="section__header">Explore Popular Categories</h2>
+          <p class="section__subheader">
+            Dive into a vast collection of books across various genres and find your next favorite read.
+          </p>
+          <button class="btn" style="background-color:#073b4c;"><a href="{% url 'books_app:categories' %}" style="text-decoration: none;color: white;">Explore Now</a></button>
+        </div>
+      </div>
+
+    </section>
+    {% if certificate %}
+    <div class="certificate-container">
+      <div class="confetti-wrapper">
+        <!-- Placez plusieurs divs pour générer des confettis -->
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+      </div>
+      <div class="message-box">
+        <h1 class="congratulations-title">🎉 Congratulations, {{ name }}! 🎉</h1>
+        <p class="congratulation-message">You have earned a certificate for your outstanding performance!</p>
+        <a href="{% url 'books_app:generate_certificate' %}" class="download-btn">Download Your Certificate</a>
+      </div>
+    </div>
+  {% endif %}
+  
+    <section class="section__container craft__container" id="craft">
+      <div class="craft__content">
+        <h2 class="section__header">New Arrivals</h2>
+        <p class="section__subheader">
+          Discover the latest books added to our collection
+        </p>
+      </div>
+    
+      <!-- Loop through each book in latest_books -->
+      {% for book in latest_books %}
+      <div class="craft__image">
+        <div class="craft__image__content">
+          <img src="{{ book.cover_img }}" alt="{{ book.title }}" />
+          <h4>{{ book.title }}</h4>
+          <p>By {{ book.author }}</p>
+        </div>
+      <a href="{% url 'books_app:book_detail' book.id_book %}"><i class="ri-eye-fill"></i></a>
+      </div>
+      {% endfor %}
+    </section>
+
+    <div class="currently-reading-section">
+      <h3>You're Currently Reading</h3>
+  
+      {% if currently_reading_books %}
+          <ul class="currently-reading-list">
+              {% for emprunt in currently_reading_books %}
+                  <li>
+                      <div class="book-item">
+                          <img src="{{ emprunt.book.cover_img }}" alt="{{ emprunt.book.title }} cover" class="book-cover">
+                          <h4>{{ emprunt.book.title }}</h4>
+                          <p>by {{ emprunt.book.author }}</p>
+                          <!-- Link to reading page if you have it -->
+                          <a href="{% url 'books_app:view_book' book_id=emprunt.book.id_book %}" class="btn btn-primary">Go to Reading Page<i class="fas fa-arrow-right" style="margin-left: 15px;"></i></a>
+                          <a href="{% url 'books_app:change_book_status' emprunt.book.id_book %}" class="btn btn-primary" style="font-size: 10px;background-color:#2980b9;margin-top: 10px;">I finished reading this book</a>
+                        </div>
+                  </li>
+              {% endfor %}
+          </ul>
+      {% else %}
+          <p>You are not currently reading any books.</p>
+      {% endif %}
+  </div>
+  
+
+  <div class="recommended-groups-section">
+    <h2><i class="ri-chat-3-line"></i> Recommended Groups To Join According To Your Interests</h2>
+    <div class="recommended-groups-grid">
+        <!-- First Column -->
+        <ul class="recommended-groups-list">
+            {% for group in recommended_groups|slice:":9" %}
+                <li class="group-item">
+                    <div class="group-info">
+                        <i class="ri-group-line group-icon"></i>
+                        <a class="group-name">{{ group }}</a>
+                    </div>
+                    <div class="group-actions">
+                        <button class="join-button">
+                            <a href="{% url 'books_app:join_chat_group' group %}">Join</a>
+                        </button>
+                    </div>
+                </li>
+            {% empty %}
+                <li>No recommended groups available.</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Second Column -->
+        <ul class="recommended-groups-list">
+            {% for group in recommended_groups|slice:"5:" %}
+                <li class="group-item">
+                    <div class="group-info">
+                        <i class="ri-group-line group-icon"></i>
+                        <a class="group-name">{{ group }}</a>
+                    </div>
+                    <div class="group-actions">
+                        <button class="join-button">
+                            <a href="{% url 'books_app:join_chat_group' group %}">Join</a>
+                        </button>
+                    </div>
+                </li>
+            {% empty %}
+                <li>No recommended groups available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+    <div class="book-carousel-container"> 
+      <h2>Books You Might Like</h2>
+      <div class="carousel">
+          <button class="prev">&#10094;</button>
+          <div class="carousel-track-container">
+              <ul class="carousel-track">
+                {% if recommended_books %}
+                  {% for book in recommended_books %}
+                  <li class="carousel-slide">
+                    <span class="category-name {% if book.dispo == 'Not Available' %}not-available{% else %}available{% endif %}">
+                      {{ book.dispo }}
+                  </span>
+                  <img src="{{book.cover_img }}" alt="{{ book.title }}">
+                      <a href="{% url 'books_app:book_detail' book.id_book %}">{{ book.title }}</a>
+                      <p>{{ book.author }}</p>
+                  </li>
+                  {% endfor %}
+              </ul>
+              {% else %}
+              <p>Since you're new, we currently don't have recommendations for you. Please rate some books first! </p>
+        {% endif %}
+          </div>
+          <button class="next">&#10095;</button>
+      </div>
+  </div>
+
+  <div class="book-carousel-container">
+    <h2>Based on Your Reading History</h2>
+    <div class="carousel">
+        <button class="prev">&#10094;</button>
+        <div class="carousel-track-container">
+            <ul class="carousel-track">
+                {% for book in similar_books %}
+                    <li class="carousel-slide">
+                      <span class="category-name {% if book.dispo == 'Not Available' %}not-available{% else %}available{% endif %}">
+                        {{ book.dispo }}
+                    </span>                        
+                    <img src="{{ book.cover_img }}" alt="{{ book.title }}" class="book-cover">
+                        <a href="{% url 'books_app:book_detail' book.id_book %}">{{ book.title }}</a>
+                        <p>{{ book.author }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <button class="next">&#10095;</button>
+    </div>
+</div>
+
+
+
+
+<div class="book-carousel-container">
+  {% if favorite_genre %}
+      <h2>Your Favorite Genre: {{ favorite_genre }}</h2>
+      {% if trending_books %}
+          <div class="carousel">
+              <button class="prev">&#10094;</button>
+              <div class="carousel-track-container">
+                  <ul class="carousel-track">
+                      {% for book in trending_books %}
+                          <li class="carousel-slide">
+                            <span class="category-name {% if book.dispo == 'Not Available' %}not-available{% else %}available{% endif %}">
+                              {{ book.dispo }}
+                          </span>                              
+                          <img src="{{ book.cover_img }}" alt="{{ book.title }}" class="book-cover">
+                              <a href="{% url 'books_app:book_detail' book.id_book %}" class="book-title">{{ book.title }}</a>
+                              <p class="book-author">By   {{ book.author }}</p>
+                              
+                          </li>
+                      {% endfor %}
+                  </ul>
+              </div>
+              <button class="next">&#10095;</button>
+          </div>
+      {% else %}
+          <p>No books found in your favorite genre.</p>
+      {% endif %}
+  {% else %}
+      <h2>No favorite genre found.</h2>
+  {% endif %}
+</div>
+
+
+<div class="book-carousel-container">
+  {% if favorite_author %}
+    <h2>Books by Your Favorite Author: {{ favorite_author }}</h2>
+    {% if trending_author_books %}
+      <div class="carousel">
+        <button class="prev" aria-label="Previous">&#10094;</button>
+        <div class="carousel-track-container">
+          <ul class="carousel-track">
+            {% for book in trending_author_books %}
+              <li class="carousel-slide">
+                <span class="category-name {% if book.dispo == 'Not Available' %}not-available{% else %}available{% endif %}">
+                  {{ book.dispo }}
+              </span>                
+              <img src="{{ book.cover_img }}" alt="{{ book.title }}">
+                <a href="{% url 'books_app:book_detail' book.id_book %}">{{ book.title }}</a>
+                <p>{{ book.author|default:"Unknown Author" }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <button class="next" aria-label="Next">&#10095;</button>
+      </div>
+    {% else %}
+      <p>No books found by your favorite author that haven't been rated by you.</p>
+    {% endif %}
+  {% else %}
+    <h2>No favorite author found.</h2>
+  {% endif %}
+</div>
+
+
+
+
+<div class="book-carousel-container"> 
+  <h2>Books You've Rated</h2>
+  {% if rated_books %}
+  <div class="carousel">
+      <button class="prev">&#10094;</button>
+      <div class="carousel-track-container">
+          <ul class="carousel-track">
+              {% for book in rated_books %}
+              <li class="carousel-slide">
+                  <img src="{{ book.cover_img }}" alt="{{ book.title }}">
+                  <a href="{% url 'books_app:book_detail' book.id_book %}">{{ book.title }}</a>
+                  <p>{{ book.author }}</p>
+              </li>
+              {% endfor %}
+          </ul>
+      </div>
+      <button class="next">&#10095;</button>
+  </div>
+  {% else %}
+  <p>You haven't rated any books yet.</p>
+  {% endif %}
+</div>
+
+
+
+
+
+    <footer class="footer">
+      <div class="section__container footer__container">
+        <div class="footer__content">
+          <h4>SUBSCRIBE TO GET THE LATEST NEWS ABOUT US</h4>
+          <p>
+            We recommend you to subscribe to our newsletter. Enter your email to
+            get our daily updates about added books
+          </p>
+        </div>
+        <div class="footer__form">
+          <form action="/">
+            <input type="text" placeholder="Enter your email" />
+            <button>Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="section__container footer__bar">
+        <div class="footer__logo">
+          <h4><a href="#">Booktopia</a></h4>
+          <p>Copyright © 2024 Web Design Mastery. All rights reserved.</p>
+        </div>
+        <ul class="footer__nav">
+          <li class="footer__link"><a href="#">About</a></li>
+          <li class="footer__link"><a href="#">Partnership</a></li>
+          <li class="footer__link"><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </footer>
+
+
+    <script >
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      const menuBtnIcon = menuBtn.querySelector("i");
+      
+      menuBtn.addEventListener("click", (e) => {
+        navLinks.classList.toggle("open");
+      
+        const isOpen = navLinks.classList.contains("open");
+        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+      });
+      
+      navLinks.addEventListener("click", (e) => {
+        navLinks.classList.remove("open");
+        menuBtnIcon.setAttribute("class", "ri-menu-line");
+      });
+      const track = document.querySelector('.carousel-track');
+      const carousels = document.querySelectorAll('.book-carousel-container');
+
+carousels.forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const nextButton = carousel.querySelector('.next');
+    const prevButton = carousel.querySelector('.prev');
+    const slideWidth = slides[0].getBoundingClientRect().width;
+
+    let currentIndex = 0;
+
+    nextButton.addEventListener('click', () => {
+        if (currentIndex < slides.length - 1) {
+            currentIndex++;
+            const amountToMove = -slideWidth * currentIndex;
+            track.style.transform = `translateX(${amountToMove}px)`;
+        }
+    });
+
+    prevButton.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            const amountToMove = -slideWidth * currentIndex;
+            track.style.transform = `translateX(${amountToMove}px)`;
+        }
+    });
+});
+
+
+      </script>
+      <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const categorySelectors = document.querySelectorAll('.category-selector');
+    const booksContainer = document.getElementById('filtered-books-container');
+
+    categorySelectors.forEach((selector) => {
+      selector.addEventListener('click', function () {
+        const category = this.dataset.category;
+
+        // Envoi de la requête AJAX
+        fetch(`/filter_books_by_category/${category}/`, {
+          method: 'GET',
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Mise à jour du conteneur avec les livres filtrés
+            booksContainer.innerHTML = data.html;
+          })
+          .catch((error) => console.error('Error:', error));
+      });
+    });
+  });
+  function toggleNotificationContent() {
+  var notificationPopup = document.getElementById("notificationPopup");
+  notificationPopup.style.display = (notificationPopup.style.display === 'none' || notificationPopup.style.display === '') ? 'block' : 'none';
+}
+
+// Close notification popup when clicking outside
+window.addEventListener('click', function(event) {
+  var notificationPopup = document.getElementById("notificationPopup");
+  var notificationButton = document.querySelector('.icon-button');
+  if (!event.target.matches('.icon-button') && !event.target.matches('.notification-popup') && !event.target.matches('.icon-img')) {
+    notificationPopup.style.display = 'none';
+  }
+});
+
+</script>
+
+  </body>
+</html>

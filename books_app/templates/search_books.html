@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+  />
+    <title>search Book</title>
+    <style>
+          @import url("https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap");
+
+      :root {
+  --primary-color: #2f2f2f;
+  --text-dark: #18181b;
+  --text-light: #71717a;
+  --white: #ffffff;
+  --max-width: 1200px;
+  --header-font: "Lora", serif;
+}
+      * {
+        font-family: "Poppins", sans-serif;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      
+      .section__container {
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 5rem 1rem;
+      }
+      
+      .section__header {
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+        font-weight: 700;
+        font-family: var(--header-font);
+        color:#073b4c;
+      }
+      
+      .section__subheader {
+        color: var(--text-light);
+      }
+      
+      .btn {
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        color: var(--white);
+        background-color:#073b4c;
+        border-radius: 5rem;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      .btn:hover {
+        background-color: var(--text-dark);
+      }
+      
+      a {
+        text-decoration: none;
+      }
+      
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      
+      header {
+        background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.2)
+          ),
+          url("https://mdpls.org/frontend-images/editor/mdpls/group-people-reading.png");
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: auto;
+      }
+      header span {
+        color:#073b4c;
+        font-weight: bolder;
+      
+      }
+      nav {
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 2rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      
+      .nav__logo {
+        flex: 1;
+      }
+      
+      .nav__logo a {
+        font-size: 2rem;
+        font-weight: bolder;
+        font-family: var(--header-font);
+        color: #166b87;
+      }
+      
+      .nav__links {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 5rem;
+      }
+      
+      .link a {
+        position: relative;
+        padding: 10px 0;
+        color: var(--white);
+        transition: 0.3s;
+      }
+      
+      .link a::after {
+        position: absolute;
+        content: "";
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 2px;
+        width: 0;
+        background-color: var(--white);
+        transition: 0.3s;
+      }
+      
+      .link a:hover::after {
+        width: 100%;
+      }
+      
+      .nav__menu__btn {
+        display: none;
+        font-size: 1.5rem;
+        color: var(--white);
+      }
+      
+      .nav__actions {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 2rem;
+      }
+      
+      .nav__actions span {
+        font-size: 1.5rem;
+        color: var(--white);
+        cursor: pointer;
+      }
+      
+      .nav__actions span a{
+        text-decoration: none;
+        color: var(--white);
+      }
+      
+      .nav__actions span a:hover{
+        color: #073b4c;
+      }
+      
+.header__container {
+  margin-top: 0;
+  text-align: center;
+  color: var(--white);
+}
+
+.header__container h1 {
+  margin-bottom: 1rem;
+  font-size: 4.5rem;
+  font-weight: 600;
+  font-family: var(--header-font);
+}
+
+.header__container p {
+  max-width: 600px;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+  font-size: 1.2rem;
+}
+
+.header__container form {
+  width: 100%;
+  max-width: 500px;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+  padding-block: 0.25rem;
+  padding-inline: 1.25rem 0.25rem;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--white);
+  border-radius: 5rem;
+}
+
+.header__container input {
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--white);
+  background-color: transparent;
+}
+
+.header__container input::placeholder {
+  color: var(--white);
+}
+
+.header__container button {
+  padding: 11px 12px;
+  font-size: 1.25rem;
+  outline: none;
+  border: none;
+  color: var(--white);
+  background-color: #073b4c;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.header__container a {
+  display: inline-block;
+  padding: 0 12px;
+  font-size: 3rem;
+  color: var(--white);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--white);
+  border-radius: 100%;
+}
+
+.container {
+  display: flex;
+  max-width: var(--max-width);
+  width: 100%;
+}
+
+.filter-section {
+  flex: 1;
+  margin-left: 2rem;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+
+.filter-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.filter {
+  margin-bottom: 1rem;
+}
+
+.filter label{
+
+font-weight: 100;}
+
+.checkbox-item {
+  margin-bottom: 0.5rem;
+}
+
+.filter button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: var(--white);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.book-results {
+  flex: 3;
+  padding: 1rem;
+}
+
+.book-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.book-item {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-item h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  color: #073b4c;
+}
+
+.book-item p {
+  margin: 0.25rem 0;
+  color: var(--text-light);
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .filter-section {
+    margin-left: 0;
+    margin-bottom: 2rem;
+  }
+}
+
+.book-item {
+  display: flex;
+  align-items: flex-start;
+  border: 1px solid #ccc;
+  height: 230px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.book-cover {
+  margin-right: 1.5rem;
+}
+
+.book-cover img {
+  width: 150px;
+  height:200px;
+  object-fit: cover;
+}
+
+.book-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book-info h3 a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: #073b4c;
+}
+
+.book-info p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.book-info p span {
+font-weight: bold;  
+}
+
+.publisher-info {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+h3{
+ color: #166b87
+}
+</style>
+</head> 
+    <body>
+    <header class="header">
+    <nav>
+      <div class="nav__logo"><a href="{% url 'books_app:page_rec' %}">BookTopia</a></div>
+      <ul class="nav__links" id="nav-links">
+        <li class="link"><a href="#home">Search</a></li>
+        <li class="link"><a href="#home">Categories</a></li>
+        <li class="link"><a href="#choose">New arrivals</a></li>
+        <li class="link"><a href="#craft">Recommendations</a></li>
+      </ul>
+      <div class="nav__menu__btn" id="menu-btn">
+        <span><i class="ri-menu-line"></i></span>
+      </div>
+      <div class="nav__actions">
+        <span><a href="#"><i class="ri-notification-3-fill"></i></a></span>
+        <span><a href="{% url 'books_app:user_profile' %}"><i class="ri-user-fill" ></i></a></span>
+      </div>
+    </nav>
+    
+    <div class="section__container header__container" id="home">
+      <h1>Search Results for "{{ query }}"</h1>
+      <p>
+        We've found some great books that match your search.<br> Filter the results below to find exactly what you're looking for, whether by genre, year, or rating!
+      </p>
+      
+      
+      <!-- Formulaire de recherche -->
+      <form method="GET" action="{% url 'books_app:search_books' %}">
+        <input type="text" name="query" placeholder="Search books by title, genre, year..." value="{{ request.GET.query }}" />
+        <button><i class="ri-search-line"></i></button>
+      </form>
+
+    </div>
+  </header>
+  
+
+  <div class="container">
+    <!-- Formulaire de filtrage -->
+    <form method="get" action="{% url 'books_app:search_books' %}" class="filter-section">
+      <h3>Filters</h3>
+      <div class="filter">
+        <label for="year" style="color: #073b4c; font-weight: bold;">Year</label>
+        <div id="year-options">
+          {% for year in available_years %}
+            <div class="checkbox-item">
+              <input type="checkbox" id="year-{{ year }}" name="year" value="{{ year }}" {% if year in selected_years %}checked{% endif %}>
+              <label for="year-{{ year }}">{{ year }}</label>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="filter">
+        <label for="category" style="color: #073b4c; font-weight: bold;" >Category</label>
+        <div id="category-options">
+          {% for value, label in genres %}
+            <div class="checkbox-item">
+              <input type="checkbox" id="category-{{ value }}" name="category" value="{{ value }}" {% if value in selected_categories %}checked{% endif %}>
+              <label for="category-{{ value }}">{{ label }}</label>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="filter">
+        <label for="author" style="color: #073b4c; font-weight: bold;" >Author</label>
+        <div id="author-options">
+          {% for author in authors %}
+            <div class="checkbox-item">
+              <input type="checkbox" id="author-{{ author }}" name="author" value="{{ author }}" {% if author in selected_authors %}checked{% endif %}>
+              <label for="author-{{ author }}">{{ author }}</label>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <button type="submit" class="btn">Apply Filters</button>
+    </form>
+
+<!-- Résultats de la recherche -->
+<div class="book-results">
+  <h2>Search Results</h2>
+  {% if books %}
+    <div class="book-list">
+      {% for book in books %}
+        <div class="book-item">
+          <div class="book-cover">
+            <img src="{{ book.cover_img }}" alt="{{ book.title }} cover"  />
+          </div>
+          <div class="book-info">
+            <h3><a href="{% url 'books_app:book_detail' book.id_book %}">{{ book.title }}</a></h3>
+            <p><span>Author:</span> {{ book.author }}</p>
+            <p><span>Year:</span> {{ book.pub_year }}</p>
+            <p><span>Genre:</span> {{ book.genre }}</p>
+            <!-- Section de l'utilisateur éditeur -->
+            
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No books found matching your search criteria.</p>
+  {% endif %}
+</div>
+
+
+</body>
+</html>

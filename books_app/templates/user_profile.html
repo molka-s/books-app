@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- ===== ===== Custom Css ===== ===== -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+
+    <!-- ===== ===== Remix Font Icons Cdn ===== ===== -->
+    <link rel="stylesheet" href="fonts/remixicon.css">
+
+    <style>
+        /* ===== =====  Poppins Google Font  ===== =====  */
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
+
+/* ===== =====>>  Universal Selector  <<===== =====  */
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-family: sans-serif;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===== =====>>  Body Font Size  <<===== =====  */
+html {
+  font-size: 10px;
+}
+
+/* ===== =====>> Css Variables  <<===== =====  */
+:root {
+  /* =====>>  Font Color  <<===== */
+  --f1-color: #fff;
+  --f2-color: #000;
+  --f3-color: rgba(0, 0, 0, 0.8);
+  --f4-color: rgba(0, 0, 0, 0.6);
+  --f5-color: #1f495a;
+  --f6-color: #88cee6;
+
+  /* =====>>  Background Color  <<===== */
+  --bg1-color: #243840;
+  --bg2-color: #000;
+  --bg3-color: #33ccff;
+  --bg4-color: #33cc33;
+  --bg5-color: #1f495a;
+  --bg6-color: rgba(0, 0, 0, 0.4);
+  --bg7-color: rgba(0, 0, 0, 0.2);
+  --glass-bg: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.3)
+  );
+  --C-lg-bg: linear-gradient(45deg, #ff3399, #ff9933);
+
+  /* ===== =====>>  Font Size  <<===== =====  */
+  --xxxl-fs: 2.2rem;
+  --xxl-fs: 1.8rem;
+  --xl-fs: 1.6rem;
+  --l-fs: 1.4rem;
+  --m-fs: 1.2rem;
+  --s-fs: 1.1rem;
+  --xs-fs: 1rem;
+
+  /* =====>>  Margin  <<===== */
+  --m-2-5: 2.5rem;
+  --m-1-8: 1.8rem;
+  --m-1-5: 1.5rem;
+  --m-0-6: 0.6rem;
+  --m-0-5: 0.2rem;
+  --m-0-3: 0.3rem;
+
+  /* =====>>  Padding  <<===== */
+  --p-2-5: 2.5rem;
+  --p-1-5: 1.7rem;
+  --p-1-0: 1rem;
+  --p-0-8: 0.8rem;
+  --p-0-5: 0.5rem;
+  --p-0-4: 0.4rem;
+  --p-0-3: 0.3rem;
+}
+
+/* ===== =====>>  Body Css  <<===== =====  */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ===== =====>> Body Main-Background Css <<===== ===== */
+.main_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("{% static 'bg.avif' %}");
+  background-size: cover; /* Ajuste l'image pour couvrir toute la page */
+  background-repeat: no-repeat; /* Empêche la répétition de l'image */
+  background-position: center; /* Centre l'image pour un rendu optimal */
+  z-index: -1; /* Place l'arrière-plan derrière les autres éléments */
+  filter: blur(3px); /* Applique un flou pour un effet élégant */
+}
+
+
+/* ===== =====>>  Main-Container Css  <<===== =====  */
+/* ===== =====>> Main-Container Css <<===== ===== */
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas:
+    "header header"
+    "userProfile userDetails"
+    "work_skills timeline_about"
+    "work_skills timeline_about";
+  width: 85%;
+  height: 90vh;
+  padding: var(--p-1-5);
+
+  /* Effet visuel amélioré */
+  backdrop-filter: blur(1rem); /* Effet flou */
+  background-color: rgba(180, 220, 236, 0.137); /* Couleur semi-transparente */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), /* Ombre extérieure douce */
+              inset 0 1px 5px rgba(255, 255, 255, 0.1); /* Ombre intérieure subtile */
+  border: 2px solid rgba(21, 19, 19, 0.751); /* Bordure légère pour accentuer l'effet de verre */
+  border-radius: 1rem; /* Coins arrondis */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide */
+  background-color: white;
+  height:auto;
+}
+
+/* Effet au survol pour dynamiser */
+.container:hover {
+  transform: translateY(-5px); /* Légère élévation */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), /* Ombre extérieure plus marquée */
+              inset 0 2px 10px rgba(255, 255, 255, 0.2); /* Ombre intérieure plus visible */
+}
+
+/* ===== =====>>  Container Cards Grid-Area Css Start  <<===== =====  */
+header {
+  grid-area: header;
+}
+
+.userProfile {
+  grid-area: userProfile;
+}
+
+.work_skills {
+  grid-area: work_skills;
+}
+
+.userDetails {
+  grid-area: userDetails;
+}
+
+.timeline_about {
+  grid-area: timeline_about;
+}
+
+/* ===== =====>>  Container Cards Css  <<===== =====  */
+.container .card {
+  
+  border-radius: 1rem; /* Coins arrondis plus visibles */
+  
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure légère pour un effet verre */
+  padding: var(--p-1-5);
+  background: rgba(45, 68, 88, 0.1); /* Transparence pour accentuer l'effet flou */
+  
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide */
+}
+
+/* Effet au survol */
+.container .card:hover {
+  transform: translateY(-5px); /* Légère élévation */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), /* Ombre extérieure plus marquée */
+              inset 0 2px 10px rgba(255, 255, 255, 0.2); /* Ombre intérieure plus visible */
+}
+
+
+/* ===== =====>>  Container Header/Navbar Css  <<===== =====  */
+.container header {
+  padding: 0 var(--p-2-5);
+  
+}
+
+.container header .brandLogo {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.container header .brandLogo span {
+  font-size: var(--xl-fs);
+  font-weight: 700;
+  margin-left: var(--m-0-5);
+}
+
+/* ===== =====>>  User Main-Profile Css Start  <<===== ===== */
+.container .userProfile {
+  position: relative;
+  display: block; /* Mettre les composants en bloc pour qu'ils soient les uns sous les autres */
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  
+}
+
+.container .userProfile .profile{
+  margin-left: 120px;
+  margin-right:120px;
+}
+
+
+/* ===== =====>>  Work & Skills Css Start  <<===== ===== */
+.container .work_skills {
+  padding: var(--p-1-5);
+  height: 430px;
+  margin: 10px;
+}
+
+.work_skills .work .heading,
+.work_skills .skills .heading {
+  position: relative;
+  font-size: var(--xs-fs);
+  color: rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  margin-bottom: var(--m-1-5);
+}
+
+.work_skills .work .heading::before,
+.work_skills .skills .heading::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 0.1rem;
+  width: 88%;
+  background: var(--bg6-color);
+}
+
+.work_skills .work .primary,
+.work_skills .work .secondary {
+  position: relative;
+}
+
+.work_skills .work .primary h1,
+.work_skills .work .secondary h1 {
+  font-size: var(--l-fs);
+  color: var(--f3-color);
+  margin-bottom: var(--m-0-6);
+}
+
+.work_skills .work .primary span,
+.work_skills .work .secondary span {
+  position: absolute;
+  top: 0;
+  right: 3rem;
+  font-weight: 700;
+  font-size: var(--s-fs);
+  color: var(--f5-color);
+  background: #e6f2ff;
+  padding: var(--p-0-4) var(--p-1-0);
+  border-radius: 0.4rem;
+}
+
+.work_skills .work .primary p,
+.work_skills .work .secondary p {
+  margin-bottom: var(--m-1-8);
+  font-size: var(--m-fs);
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 1.6rem;
+}
+
+/* =====>>  Skills Bars Css  <<===== */
+.work_skills .skills ul li {
+  position: relative;
+  font-size: var(--m-fs);
+  line-height: 1.8rem;
+  margin: var(--m-0-5);
+  color: var(--f2-color);
+  font-weight: 500;
+}
+
+.work_skills .skills ul li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  height: 0.2rem;
+  background: var(--bg3-color);
+  animation: skills 8s linear infinite;
+  animation-delay: calc(-2s * var(--i));
+}
+
+@keyframes skills {
+  0% {
+    width: 50%;
+    filter: hue-rotate(180deg);
+  }
+
+  50% {
+    width: 0;
+  }
+
+  100% {
+    width: 50%;
+    filter: hue-rotate(0);
+  }
+}
+
+/* ===== =====>>  User Details Css Start  <<===== ===== */
+.userDetails {
+  position: relative;
+  padding: var(--p-1-5) var(--p-2-5);
+}
+
+.userDetails .userName h1 {
+  font-size: var(--xxxl-fs);
+}
+
+.userDetails .userName .map {
+  position: absolute;
+  top: 2.5rem;
+  left: 18.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userDetails .userName .map .ri {
+  margin-right: var(--m-0-3);
+  font-size: var(--m-fs);
+}
+
+.userDetails .userName .map span {
+  font-size: var(--s-fs);
+  color: var(--f3-color);
+  font-weight: 700;
+}
+
+.userDetails .userName p {
+  font-size: var(--m-fs);
+  font-weight: 700;
+  color: var(--f5-color);
+  margin-bottom: var(--m-1-8);
+}
+
+.userDetails .rank {
+  position: relative;
+  margin-bottom: var(--m-1-8);
+}
+
+.userDetails .rank .heading {
+  font-size: var(--xs-fs);
+  color: var(--f4-color);
+  text-transform: uppercase;
+  margin-bottom: var(--m-0-6);
+}
+
+.userDetails .rank span {
+  font-size: var(--xxl-fs);
+  font-weight: 700;
+}
+
+.userDetails .rank .rating {
+  position: absolute;
+  top: 2.7rem;
+  left: 3.5rem;
+}
+
+.userDetails .rank .rating .rate {
+  color: var(--f5-color);
+  font-size: var(--l-fs);
+}
+
+.userDetails .rank .rating .underrate {
+  color: var(--f6-color);
+}
+
+.userDetails .btns ul,
+.userDetails .btns ul li {
+  display: flex;
+  align-items: center;
+  margin-left:40px ;
+  margin-top: 30px;
+}
+
+.userDetails .btns ul li {
+  margin-right: var(--m-2-5);
+  border-radius: 0.5rem;
+}
+
+.userDetails .btns ul li .ri {
+  margin-right: var(--m-0-5);
+  font-size: var(--xl-fs);
+}
+
+.userDetails .btns ul li a {
+  font-size: var(--l-fs);
+  color: var(--f2-color);
+  font-weight: 500;
+}
+
+.userDetails .btns ul .active {
+  background: #e6f2ff;
+  padding: var(--p-0-5) var(--p-1-5);
+}
+
+.userDetails .btns ul .active a,
+.userDetails .btns ul .active .ri {
+  color: var(--f5-color);
+}
+
+/* ===== =====>>  Timeline & About Css Start  <<===== ===== */
+.timeline_about {
+  padding: var(--p-2-5);
+}
+
+.timeline_about .tabs ul {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--m-2-5);
+}
+
+.timeline_about .tabs ul::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 1px;
+  
+}
+
+.timeline_about .tabs ul li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: var(--m-2-5);
+  padding-bottom: var(--p-0-8);
+  cursor: pointer;
+}
+
+.timeline_about .tabs ul li span {
+  font-size: var(--l-fs);
+  font-weight: 500;
+}
+
+.timeline_about .tabs ul li .ri {
+  margin-right: var(--m-0-5);
+}
+
+
+
+.timeline_about .contact_info .heading,
+.timeline_about .basic_info .heading {
+  font-size: var(--xs-fs);
+  color: var(--f4-color);
+  text-transform: uppercase;
+  margin-bottom: var(--m-1-5);
+}
+
+.timeline_about .contact_info ul,
+.timeline_about .basic_info ul {
+  margin-bottom: var(--m-1-5);
+}
+
+.timeline_about .contact_info ul li,
+.timeline_about .basic_info ul li {
+  display: flex;
+  margin: var(--m-0-5) 0;
+}
+
+.timeline_about .contact_info ul li h1,
+.timeline_about .basic_info ul li h1 {
+  font-weight: 500;
+  font-size: var(--m-fs);
+  min-width: 12rem;
+}
+
+.timeline_about .contact_info ul li span,
+.timeline_about .basic_info ul li span {
+  font-size: var(--m-fs);
+}
+
+.timeline_about .contact_info ul .phone span,
+.timeline_about .contact_info ul .email span,
+.timeline_about .contact_info ul .site span {
+  color: var(--f5-color);
+}
+/*arrivals*/
+
+
+
+
+.arrivals {
+    width: 100%;
+    margin-bottom: 35px;
+    margin-top: 0;
+    padding: 20px 0; /* Plus d'espace autour de la section */
+    
+    border-radius: 10px;
+   
+}
+
+.arrivals h1 {
+    font-size: 30px;
+    text-align: center;
+    color: #1f495a;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.arrivals .arrivals_box {
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Grille responsive */
+    grid-gap: 10px; /* Espacement entre les livres */
+    justify-items: center;
+    padding: 0 10px;
+}
+
+
+
+
+.arrivals .arrivals_box .arrivals_card {
+    width: 100%;
+    height: 230px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: #ffffff;
+    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.arrivals .arrivals_box .arrivals_card {
+    width: 220px;
+    height: auto;
+    text-align: center;
+    border: #000;
+    
+    
+    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.arrivals .arrivals_box .arrivals_card:hover {
+    transform: translateY(-10px); /* Léger effet de montée lors du survol */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Ombre plus forte au survol */
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_image {
+    width: 100%;
+    height: 100px;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.arrivals .arrivals_box .arrivals_card:hover .arrivals_image img {
+    transform: scale(1.05); /* Zoom léger de l'image */
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag {
+    padding: 15px;
+    text-align: left;
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag p {
+    font-size:20px;
+    color: #333;
+    font-weight: 600;
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag .arrivals_icon {
+    font-size: 20px;
+    color: #1f495a;
+    margin: 10px 0;
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag .arrivals_btn {
+    padding: 10px 25px;
+    border: 2px solid #1f495a;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #1f495a;
+    background-color: #eaeff1;
+    font-size: 10px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 25px;
+}
+
+.arrivals .arrivals_box .arrivals_card .arrivals_tag .arrivals_btn:hover {
+    background-color: #1f495a;
+    color: #fff; /* Change le texte en blanc lors du survol */
+}
+
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 9px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 10px;
+  }
+
+  /* ===== =====>>  Container Css Start  <<===== ===== */
+  
+  /* ===== =====>>  Container Card Css Start  <<===== ===== */
+  .container .card {
+    backdrop-filter: none;
+  }
+
+  .userDetails {
+    margin-bottom: 3rem;
+  }
+
+  .container::before,
+  .container::after {
+    display: none;
+  }
+
+  /* ===== =====>>  Header/Navbar Css Start  <<===== ===== */
+  .container header {
+    padding: 2.5rem;
+  } 
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 100%;
+    overflow: initial;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .main_bg {
+    animation: none;
+  }
+}
+
+.userProfile .profile button {
+    background-color: #1f495a; 
+    color: white; /* White text */
+    border: none; /* Remove border */
+    padding: 10px 10px; /* Add padding */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Inline-block element */
+    font-size: 12px; /* Increase font size */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 10px;
+    margin-left: 38px;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.userProfile .profile button:hover {
+    background-color: #1f495a; /* Darker green on hover */
+}
+
+.userProfile .profile button:active {
+    background-color: #1f495a; /* Even darker green when clicked */
+    transform: translateY(2px); /* Slight movement down when clicked */
+}
+.reading-history .tabs ul li {
+  display: inline-block;
+  padding: 5px 20px;
+  padding-top: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+ color: #0b2834;
+ font-weight: bolder;
+}
+
+.tabs ul li.active {
+  border-bottom: 2px solid #000; 
+}
+
+.reading-history .tabs ul li:hover {
+  color: #2f7c9b; /* Optionnel : Change la couleur au survol */
+}
+.reading-history .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.reading-history .tab-button {
+    background-color: #ddd;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.reading-history .tab-button.active {
+    background-color: #0b2834;
+    color: white;
+}
+
+.reading-history .tab-content {
+    display: none;
+}
+
+.reading-history .tab-content.active {
+    display: block;
+}
+
+.book-card {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.board:hover{
+  transform: translateY(-5px); 
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Ombre plus forte au survol */
+
+}
+
+.book-card img {
+    width: 60px;
+    height: 90px;
+    margin-right: 20px;
+}
+
+.book-info {
+    color: #333;
+}
+
+.book-info h3 {
+    margin: 0 0 5px;
+    font-size: 18px;
+    color: #0b2834;
+}
+.board-container {
+  padding: 10px;
+  background-color: #f7f9fc;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.board {
+    background-color: #b4dcec;
+    border-radius: 10px;
+    width: 220px;
+    height: auto ;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.board-container .board .board-title a {
+    font-size: 18px;
+    color: #1f495a;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+.pins {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.pins img {
+  padding-top:15px ;
+    width: 70px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.pin-info {
+    font-size: 14px;
+    color: #1f495a;
+    margin-top: 10px;
+}
+
+.pin-info span {
+    float: right;
+}
+
+.section {
+    display: flex;
+    flex-direction: column; /* Or whatever layout direction you need */
+}
+.category-name{
+  background-color: #389b2f;
+    position: absolute;
+    top: 10px;
+    left:10px;
+    font-size: 13px;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 2px;
+}
+.floating-icon {
+  position: fixed;
+  bottom: 20px; /* Adjust as per your preference */
+  right: 20px; /* Adjust as per your preference */
+  background-color: #2f7c9b; /* Background color of the icon */
+  border-radius: 50%; /* Circular shape */
+  padding: 15px;
+  width: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for better visibility */
+  color: white; /* Icon color */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.floating-icon:hover {
+  background-color: #0056b3; /* Darker background color when hovered */
+}
+
+.floating-icon a {
+  line-height: 0; /* Ensures the icon is centered inside the circle */
+  text-decoration: none;
+  color: white;
+  line-height: 0; /* Ensures the icon is centered inside the circle */
+font-size: 15px;
+}
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #325e70; /* Couleur par défaut */
+  color: white;
+  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  padding-top: 3px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* Style pour le bouton View More */
+.arrivals_btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.arrivals_btn:hover {
+  background-color: #45a049;
+}
+
+/* Style pour le modal */
+.modal {
+  display: none; /* Masqué par défaut */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+  overflow: auto; /* Permet de faire défiler le modal si nécessaire */
+  padding-top: 60px; /* Espacement par rapport en haut */
+}
+
+/* Contenu du modal */
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px; /* Limite la largeur du modal */
+}
+
+/* Style du titre et de l'image de couverture dans le header */
+.modal-title-container {
+  display: flex;
+  align-items: center; /* Aligner l'image et le titre au centre verticalement */
+  gap: 20px; /* Espacement entre l'image et le titre */
+}
+
+.modal-book-cover {
+  width: 60px; /* Taille de l'image de couverture */
+  height: 90px;
+  object-fit: cover; /* Pour que l'image conserve ses proportions */
+  border-radius: 5px; /* Coins arrondis pour l'image */
+}
+
+.modal-header h2 {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+/* Style des autres éléments du modal */
+.modal-body {
+  padding: 20px 0;
+}
+
+.modal-footer {
+  text-align: center;
+  padding-top: 10px;
+}
+
+/* Style des boutons */
+.btn {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Le bouton de fermeture */
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-family: Arial, sans-serif;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Titre du modal */
+.modal-header h2 {
+  font-size: 26px;
+  color: #2d2d2d;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #325e70; /* Ligne sous le titre pour plus de style */
+  padding-bottom: 15px;
+}
+
+/* Texte du modal */
+.modal-body p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #555;
+  text-align: justify;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 20px;
+}
+
+/* Mettre en valeur les éléments forts dans la description */
+.modal-body p strong {
+  font-weight: bold;
+  color: #325e70; /* Accent rouge pour attirer l'attention sur des informations importantes */
+}
+
+/* Le bouton de fermeture */
+.close {
+  color: #325e70; /* Bouton de fermeture avec une couleur élégante */
+  font-size: 36px;
+  font-weight: bold;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+  color: #325e70; /* Couleur plus foncée au survol */
+  text-decoration: none;
+}
+
+/* Footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end; /* Aligner les boutons à droite */
+  gap: 10px; /* Espacement entre les boutons */
+  padding: 10px;
+  background-color: #f9f9f9; /* Fond légèrement gris */
+  border-top: 1px solid #ddd; /* Ligne de séparation */
+}
+
+/* Bouton de fermeture dans le footer */
+.modal-footer .btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff; /* Couleur bleue par défaut */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn:hover {
+  background-color: #0056b3; /* Couleur bleue plus sombre au survol */
+}
+
+/* Style du bouton "Delete" */
+.btn-danger {
+  background-color: #dc3545; /* Couleur rouge */
+}
+
+.btn-danger:hover {
+  background-color: #b02a37; /* Rouge plus sombre au survol */
+}
+
+/* Animation de l'apparition du modal */
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Animation de glissement du modal */
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Style du popup */
+.popup_del {
+  display: none; /* Caché par défaut */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.popup-content p {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+.popup-content .btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popup-content .btn:hover {
+  background-color: #0056b3;
+}
+
+
+    </style>
+</head>
+
+<body>
+    {% load static %} 
+
+<!-- ===== ===== Body Main-Background ===== ===== -->
+<span class="main_bg"></span>
+
+
+<!-- ===== ===== Main-Container ===== ===== -->
+<div class="container" >
+
+    <!-- ===== ===== Header/Navbar ===== ===== -->
+    <header>
+        <div class="brandLogo">
+            <figure></figure>
+        </div>
+    </header>
+
+    <section class="userProfile card">
+    <div class="profile">
+        <div class="pprofileImage">
+          <figure>
+            <div class="avatar">
+              <span>{{ user.initials }}</span>
+            </div>
+          </figure>
+        </div>
+    </div>
+      
+      
+      
+   
+
+
+    <!-- ===== ===== Work & Skills Section ===== ===== -->
+    <section class="work_skills card">
+
+        <!-- ===== ===== Work Contaienr ===== ===== -->
+        <div class="work">
+            <h1 class="heading">Contact Information</h1>
+            <div class="primary">
+                <h1><i class="fas fa-phone-alt"></i> Phone</h1>
+                <span>Primary</span>
+                <p>+216 {{ user.phone }}</p>
+            </div>
+
+            <div class="primary">
+                <h1><i class="fas fa-map-marker-alt"></i> Address</h1>
+                <span>Primary</span>
+              <p>{{ user.address }} </p>
+          </div>
+
+
+        <div class="primary">
+            <h1><i class="fas fa-envelope"></i> E-mail</h1>
+            <span>Primary</span>
+          <p>{{ user.email }}</p>
+      </div>
+    </section>
+  </section>
+
+
+    <!-- ===== ===== User Details Sections ===== ===== -->
+    <section class="userDetails card">
+        <div class="userName">
+            <h1 class="name">{{ user.first_name }} {{ user.last_name }}</h1>
+            <div class="map">
+                <i class="ri-map-pin-fill ri"></i>
+                <span>{{ user.address }} </span>
+            </div>
+            <p>Booktopia member</p>
+        </div>
+
+        <div class="rank">
+            <h1 class="heading">Rankings</h1>
+            <span>8,6</span>
+            <div class="rating">
+                <i class="ri-star-fill rate"></i>
+                <i class="ri-star-fill rate"></i>
+                <i class="ri-star-fill rate"></i>
+                <i class="ri-star-fill rate"></i>
+                <i class="ri-star-fill rate underrate"></i>
+            </div>
+        </div>
+
+
+    <!-- ===== ===== Timeline & About Sections ===== ===== -->
+    <section class="timeline_about card" >
+        <div class="tabs">
+            <ul>
+              <li class="timeline" onclick="showSection('reading-history-section', this)">
+                <i class="ri-eye-fill ri"></i>
+                    <span>Reading history</span>
+                </li>
+
+                <li class="about active" onclick="showSection('my_books', this)">
+                  <i class="ri-user-3-fill ri"></i>
+                    <span>My books</span>
+                </li>
+
+                <li class="timeline">
+                  <li class="timeline" onclick="showSection('personal-library', this)">
+              </li>
+
+            </ul>
+        </div>
+      </section>
+
+<!--Arrivals-->
+
+<!-- Structure des livres -->
+<div class="arrivals">
+  <div class="arrivals_box" id="my_books">
+    {% for book in books %}
+      <div class="arrivals_card">
+        <div class="arrivals_image">
+          <span class="category-name">{{ book.dispo }}</span>
+          <img src="{{ book.image_url }}">
+        </div>
+        <div class="arrivals_tag">
+          <p>{{ book.title }}</p>
+          <p style="font-size: 10px;color: grey; margin-bottom: 20px;">By {{ book.author }}</p>
+          
+          <!-- Passer les informations du livre au modal via les attributs data-* -->
+          <a href="#" class="arrivals_btn" data-id="{{ book.id }}"
+             data-title="{{ book.title }}"
+             data-author="{{ book.author }}"
+             data-description="{{ book.description }}"
+             data-genre="{{ book.genre }}"
+             data-rating="{{ book.rating|default:'Not rated yet' }}"
+             data-image="{{ book.image_url }}"
+             onclick="openModal(this)">View More</a>
+        </div>
+      </div>
+    {% empty %}
+      <p>No books available.</p>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Modal (popup) unique pour tous les livres -->
+<div id="bookModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-header">
+      <!-- Conteneur pour le titre et l'image -->
+      <div class="modal-title-container">
+        <!-- Image de couverture à gauche du titre -->
+        <img id="modal-image" class="modal-book-cover" src="" alt="Book Image">
+        <h2 id="modal-title">Book Title</h2>
+      </div>
+    </div>
+    <div class="modal-body">
+      <p><strong>Author:</strong> <span id="modal-author">Author Name</span></p>
+      <p><strong>Category:</strong> <span id="modal-category">Genre</span></p>
+      <p><strong>Description:</strong> <span id="modal-description">Description</span></p>
+      <p><strong>Rating:</strong> <span id="modal-rating">Not rated yet</span></p>
+    </div>
+    {% if messages %}
+  <div>
+    {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal()">Close</button>
+      <!-- Formulaire de suppression -->
+      <form id="delete_form" method="POST" action="{% url 'books_app:delete_book' book_id=0 %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+    
+    
+    </div>
+  </div>
+</div>
+  <div id="success-popup" class="popup_del">
+    <div class="popup-content">
+      <p>Deleted successfully</p>
+      <button class="btn" onclick="closePopup()">OK</button>
+    </div>
+  </div>
+  
+  
+
+  <div id="reading-history-section" class="reading-history" style="display: none;" >
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab(event, 'in-progress')">In Progress</button>
+        <button class="tab-button" onclick="openTab(event, 'completed')">Completed</button>
+    </div>
+
+    <div id="in-progress" class="tab-content active">
+      <h2>Books In Progress</h2>
+      {% for book in in_progress_books %}
+          <div class="book-card">
+              <img src="{{ book.cover_img }}" alt="Book Cover">
+              <div class="book-info">
+                  <h3>{{ book.title }}</h3>
+                  <p>Author: {{ book.author }}</p>
+                  <p>Started on: {{ book.start_date }}</p>
+              </div>
+          </div>
+      {% empty %}
+      <p>No books available.</p>
+  {% endfor %} 
+  </div>
+  
+  <div id="completed" class="tab-content">
+      <h2>Books Completed</h2>
+      {% for book in completed_books %}
+          <div class="book-card">
+              <img src="{{ book.cover_img }}" alt="Book Cover">
+              <div class="book-info">
+                  <h3>{{ book.title }}</h3>
+                  <p>Author: {{ book.author }}</p>
+              </div>
+          </div>
+      {% empty %}
+      <p>No books available.</p>
+  {% endfor %} 
+  </div>
+</div>
+<div class="board-container" id="personal-library" style="display: none;">
+  <div class="board">
+      <div class="board-title">
+          <a href="#"></a>
+      </div>
+      <div class="pins">
+              <img src="" >
+      </div>
+      <div class="pin-info"></div>
+  </div>
+
+
+
+</div>
+
+</section>
+</div>
+
+<div class="floating-icon">
+<a href="{% url 'books_app:profil_view' %}">+</a>
+</div>
+
+<script>
+  document.getElementById('imageUpload').addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+              document.getElementById('profileImage').setAttribute('src', event.target.result);
+          };
+          reader.readAsDataURL(file);
+      }
+  });
+  document.querySelectorAll('.tabs ul li').forEach(item => {
+    item.addEventListener('click', function() {
+      // Supprimer la classe active de tous les éléments
+      document.querySelectorAll('.tabs ul li').forEach(li => li.classList.remove('active'));
+
+      // Ajouter la classe active à l'élément cliqué
+      this.classList.add('active');
+    });
+  });
+
+
+  function showSection(sectionId, element) {
+    // Cache toutes les sections
+    document.getElementById("my_books").style.display = "none";
+    document.getElementById("reading-history-section").style.display = "none";
+    document.getElementById("personal-library").style.display = "none";
+
+    if (sectionId=="reading-history-section"){
+      document.getElementById(sectionId).style.display = "block";
+    }
+    else{
+    // Affiche la section correspondante
+    document.getElementById(sectionId).style.display = "flex";}
+ 
+    // Supprime la classe "active" de tous les éléments du menu
+    document.querySelectorAll('.tabs ul li').forEach(li => li.classList.remove('active'));
+
+    // Ajoute la classe "active" à l'élément cliqué
+    element.classList.add('active');
+}
+
+
+function openTab(evt, tabName) {
+    var i, tabcontent, tabbuttons;
+
+    // Cache toutes les sections de contenu de l'onglet
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Supprime la classe "active" de tous les boutons
+    tabbuttons = document.getElementsByClassName("tab-button");
+    for (i = 0; i < tabbuttons.length; i++) {
+        tabbuttons[i].classList.remove("active");
+    }
+
+    // Affiche l'onglet sélectionné et ajoute la classe "active" au bouton cliqué
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.classList.add("active");
+}
+// Simulez un utilisateur avec des initiales (par exemple, via un back-end)
+const userName = "Alice Brown"; 
+const initials = userName
+  .split(" ")
+  .map(name => name[0])
+  .join("");
+document.getElementById("initials").textContent = initials;
+
+
+</script>
+<script>
+  // Fonction pour ouvrir le modal et remplir les informations du livre
+  function openModal(button) {
+    // Récupérer les informations du livre depuis les attributs data-*
+    var bookId = button.getAttribute('data-id');
+    var title = button.getAttribute('data-title');
+    var author = button.getAttribute('data-author');
+    var description = button.getAttribute('data-description');
+    var genre = button.getAttribute('data-genre');
+    var rating = button.getAttribute('data-rating');
+    var imageUrl = button.getAttribute('data-image');
+
+    // Modifier l'action du formulaire pour inclure le bon book_id
+    var form = document.getElementById('delete_form');
+    form.action = form.action.replace(/\/\d+\/$/, '/' + bookId + '/');
+
+    // Mettre à jour le contenu du modal
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-author').innerText = author;
+    document.getElementById('modal-description').innerText = description;
+    document.getElementById('modal-category').innerText = genre;
+    document.getElementById('modal-rating').innerText = rating;
+    document.getElementById('modal-image').src = imageUrl;
+
+    // Afficher le modal
+    document.getElementById('bookModal').style.display = 'block';
+  }
+
+  // Fonction pour fermer le modal
+  function closeModal() {
+    document.getElementById('bookModal').style.display = 'none';
+  }
+
+  
+</script>
+
+  <script>
+    function showSuccessPopup() {
+  const popup = document.getElementById('success-popup');
+  popup.style.display = 'flex'; // Afficher le popup
+}
+
+function closePopup() {
+  const popup = document.getElementById('success-popup');
+  popup.style.display = 'none'; // Cacher le popup
+}
+
+
+  </script>
+  
+</body>
+
+</html>

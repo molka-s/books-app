@@ -1,0 +1,339 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Booktopia</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            border: 2px solid #504949; /* Couleur de bordure gris clair */
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar .logo-sidebar {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            
+            
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-header .logo {
+            width: 50px;
+            margin-right: 20px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .kpis-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .kpi {
+    background-color: #fff;
+    padding: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 22%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 2px solid #171a2b; /* Couleur de bordure gris clair */
+}
+
+
+        .kpi h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .kpi p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .charts-row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            
+        }
+
+        .chart-section {
+            width: 48%;
+            margin-bottom: 30px;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-header {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 6px;
+            background-color: #2c3e50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar or Navigation -->
+        <div class="sidebar">
+            <img src="{% static 'logo.png' %}" alt="Booktopia Logo" class="logo-sidebar">
+            <h3>Dashboard</h3>
+            <ul>
+                <li><a href="#">Overview</a></li>
+                <li><a href="#">Statistics</a></li>
+                <li><a href="#">Books</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div class="header-logo">
+                    <img src="{% static 'logo.png' %}" alt="Booktopia Logo" class="logo">
+                </div>
+                <h1> {{ user.last_name }} , Welcome to Your Booktopia Dashboard</h1>
+            </div>
+
+            <!-- KPIs Section -->
+            <div class="kpis-container">
+                <div class="kpi">
+                    <h3>Total Borrowed Books</h3>
+                    <p>{{ borrowed_books }}</p>
+                </div>
+                <div class="kpi">
+                    <h3>Total Available Books</h3>
+                    <p>{{ available_books }}</p>
+                </div>
+                <div class="kpi">
+                    <h3>Books Rated</h3>
+                    <p>{{ books_rated }}</p>
+                </div>
+                <div class="kpi">
+                    <h3>Borrowed Last Month</h3>
+                    <p>{{ borrowed_last_month }}</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-row">
+                <!-- Fréquence de lecture par mois -->
+                <div class="chart-section">
+                    <div class="chart-header">Reading Frequency per Month</div>
+                    <div class="chart-container">
+                        <canvas id="readingFrequencyChart"></canvas>
+                    </div>
+                </div>
+                 <!-- Statuts d'emprunts -->
+                 <div class="chart-section">
+                    <div class="chart-header">Emprunt Status</div>
+                    <div class="chart-container">
+                        <canvas id="empruntStatusChart"></canvas>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="charts-row">
+                <!-- Temps de lecture -->
+                <div class="chart-section">
+                    <div class="chart-header">Reading Time Distribution</div>
+                    <div class="chart-container">
+                        <canvas id="readingTimeDistributionChart"></canvas>
+                    </div>
+                </div>
+
+               
+                <!-- Pages vs Ratings -->
+                <div class="chart-section">
+                    <div class="chart-header">Pages vs Ratings</div>
+                    <div class="chart-container">
+                        <canvas id="pagesVsRatingsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-row">
+                <!-- Engagement par genre -->
+                <div class="chart-section">
+                    <div class="chart-header">Engagement by Genre</div>
+                    <div class="chart-container">
+                        <canvas id="engagementByGenreChart"></canvas>
+                    </div>
+                </div>
+                <!-- Répartition des évaluations -->
+                <div class="chart-section">
+                    <div class="chart-header">Rating Distribution</div>
+                    <div class="chart-container">
+                        <canvas id="ratingDistributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-row">
+                
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fréquence de lecture par mois
+        const readingFrequencyCtx = document.getElementById('readingFrequencyChart').getContext('2d');
+        const readingFrequencyChart = new Chart(readingFrequencyCtx, {
+            type: 'line',
+            data: {
+                labels: {{ reading_frequency_labels|safe }},
+                datasets: [{
+                    label: 'Borrowed Books per Month',
+                    data: {{ reading_frequency_values|safe }},
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    fill: false
+                }]
+            }
+        });
+
+        // Répartition des évaluations (bar chart)
+        const ratingCtx = document.getElementById('ratingDistributionChart').getContext('2d');
+        const ratingDistributionChart = new Chart(ratingCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ rating_labels|safe }},
+                datasets: [{
+                    label: 'Books Rated',
+                    data: {{ rating_values|safe }},
+                    backgroundColor: '#FFC107',
+                    borderColor: '#FF9800',
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        // Temps de lecture (pie chart)
+        const readingTimeCtx = document.getElementById('readingTimeDistributionChart').getContext('2d');
+        const readingTimeDistributionChart = new Chart(readingTimeCtx, {
+            type: 'pie',
+            data: {
+                labels: {{ reading_time_labels|safe }},
+                datasets: [{
+                    data: {{ reading_time_values|safe }},
+                    backgroundColor: ['#FF6347', '#FFD700', '#32CD32'],
+                    hoverOffset: 4
+                }]
+            }
+        });
+
+        // Statuts d'emprunts (donut chart)
+        const empruntStatusCtx = document.getElementById('empruntStatusChart').getContext('2d');
+        const empruntStatusChart = new Chart(empruntStatusCtx, {
+            type: 'doughnut',
+            data: {
+                labels: {{ donut_labels|safe }},
+                datasets: [{
+                    data: {{ donut_values|safe }},
+                    backgroundColor: ['#42A5F5', '#66BB6A', '#FF7043'],
+                    hoverOffset: 4
+                }]
+            }
+        });
+
+        // Engagement par genre (radar chart)
+        const engagementByGenreCtx = document.getElementById('engagementByGenreChart').getContext('2d');
+        const engagementByGenreChart = new Chart(engagementByGenreCtx, {
+            type: 'radar',
+            data: {
+                labels: {{ radar_labels|safe }},
+                datasets: [{
+                    label: 'Engagement by Genre',
+                    data: {{ radar_values|safe }},
+                    borderColor: '#FF4081',
+                    backgroundColor: 'rgba(255, 64, 129, 0.2)',
+                    pointBackgroundColor: '#FF4081',
+                    pointBorderColor: '#FF4081',
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            }
+        });
+
+        // Pages vs Ratings (scatter plot)
+        const pagesVsRatingsCtx = document.getElementById('pagesVsRatingsChart').getContext('2d');
+        const pagesVsRatingsChart = new Chart(pagesVsRatingsCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Pages vs Ratings',
+                    data: {{ scatter_pages|safe }}.map((value, index) => ({ x: value, y: {{ scatter_ratings|safe }}[index] })),
+                    backgroundColor: 'rgba(255, 99, 132, 1)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+</body>
+</html>

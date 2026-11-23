@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booktopia</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Slick CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+  />
+    <!-- Genres Section -->
+    <style>
+              :root {
+  --primary-color: #2f2f2f;
+  --text-dark: #18181b;
+  --text-light: #71717a;
+  --white: #ffffff;
+  --max-width: 1200px;
+  --header-font: "Lora", serif;
+}
+      * {
+        font-family: "Poppins", sans-serif;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body{
+        background-color:beige;
+
+      }
+      
+      .section__container {
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 5rem 1rem;
+      }
+      
+      .section__header {
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+        font-weight: 700;
+        font-family: var(--header-font);
+        color:#073b4c;
+      }
+      
+      .section__subheader {
+        color: var(--text-light);
+      }
+      
+      .btn {
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        color: var(--white);
+        background-color:#073b4c;
+        border-radius: 5rem;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      .btn:hover {
+        background-color: var(--text-dark);
+      }
+      
+      a {
+        text-decoration: none;
+      }
+      
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      
+      header {
+        background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.2)
+          ),
+          url("https://www.lyppardhub.co.uk/wp-content/uploads/2022/01/Book-club-website-header-no-text.png");
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: auto;
+      }
+      header span {
+        color:#073b4c;
+        font-weight: bolder;
+      
+      }
+      nav {
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 2rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      
+      .nav__logo {
+        flex: 1;
+      }
+      
+      .nav__logo a {
+        font-size: 2rem;
+        font-weight: bolder;
+        font-family: var(--header-font);
+        color: #166b87;
+      }
+      
+      .nav__links {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 5rem;
+      }
+      
+      .link a {
+        position: relative;
+        padding: 10px 0;
+        color: var(--white);
+        transition: 0.3s;
+      }
+      
+      .link a::after {
+        position: absolute;
+        content: "";
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 2px;
+        width: 0;
+        background-color: var(--white);
+        transition: 0.3s;
+      }
+      
+      .link a:hover::after {
+        width: 100%;
+      }
+      
+      .nav__menu__btn {
+        display: none;
+        font-size: 1.5rem;
+        color: var(--white);
+      }
+      
+      .nav__actions {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 2rem;
+      }
+      
+      .nav__actions span {
+        font-size: 1.5rem;
+        color: var(--white);
+        cursor: pointer;
+      }
+      
+      .nav__actions span a{
+        text-decoration: none;
+        color: var(--white);
+      }
+      
+      .nav__actions span a:hover{
+        color: #073b4c;
+      }
+      .header__container {
+  margin-top: 0;
+  text-align: center;
+  color: var(--white);
+}
+
+.header__container h1 {
+  margin-bottom: 1rem;
+  color: beige;
+  font-size: 4.5rem;
+  font-weight: 600;
+  font-family: var(--header-font);
+}
+
+.header__container p {
+  color: beige;
+  max-width: 600px;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+  font-size: 1.2rem;
+}
+
+.header__container form {
+  width: 100%;
+  max-width: 500px;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+  padding-block: 0.25rem;
+  padding-inline: 1.25rem 0.25rem;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--white);
+  border-radius: 5rem;
+}
+
+.header__container input {
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--white);
+  background-color: transparent;
+}
+
+.header__container input::placeholder {
+  color: var(--white);
+}
+
+.header__container button {
+  padding: 11px 12px;
+  font-size: 1.25rem;
+  outline: none;
+  border: none;
+  color: var(--white);
+  background-color: #073b4c;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.header__container a {
+  display: inline-block;
+  padding: 0 12px;
+  font-size: 3rem;
+  color: var(--white);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--white);
+  border-radius: 100%;
+}
+        .genres-container {
+          margin-top: 15px;
+            background-color: rgb(222, 222, 202);
+            padding-left: 60px;
+            padding-right: 60px;
+            border-radius: 30px;
+            margin-left: 120px;
+            margin-right: 120px;
+            height:65% ;
+            width:87%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .genre-card {
+            width: 280px;
+            height: 300px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .genre-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .genre-covers {
+            display: flex;  /* Use flexbox to align items in a row */
+            gap: 5px;       /* Add some space between the images */
+            padding: 10px;  /* Add some padding to space images from the edges */
+            justify-content: center;
+        }
+
+        .genre-card img {
+            width: 80px;    /* Set a fixed width for each book cover */
+            height: 120px;   /* Set a fixed height for each book cover */
+            object-fit: cover;
+            filter: brightness(0.7);
+            transition: filter 0.3s ease;
+        }
+
+        .genre-card:hover img {
+            filter: brightness(1);
+        }
+
+        .genre-info {
+            padding: 20px;
+            background-color: #fff;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding-bottom: 25px;
+        }
+
+        .genre-info h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color:#19495b;
+            margin-bottom: 10px;
+        }
+
+        .genre-info p {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .btn-genre {
+            display: inline-block;
+            background-color: #37525c;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-genre:hover {
+            background-color: #0d120d;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+    <nav>
+        <div class="nav__logo"><a href="{% url 'books_app:page_rec' %}">BookTopia</a></div>
+        <ul class="nav__links" id="nav-links">
+          <li class="link"><a href="#home">Search</a></li>
+          <li class="link"><a href="#home">Categories</a></li>
+          <li class="link"><a href="#choose">New arrivals</a></li>
+          <li class="link"><a href="#craft">Recommendations</a></li>
+        </ul>
+        <div class="nav__menu__btn" id="menu-btn">
+          <span><i class="ri-menu-line"></i></span>
+        </div>
+        <div class="nav__actions">
+          <span><a href="#"><i class="ri-notification-3-fill"></i></a></span>
+          <span><a href="{% url 'books_app:user_profile' %}"><i class="ri-user-fill" ></i></a></span>
+        </div>
+      </nav>
+
+      <div class="section__container header__container" id="home">
+        <h1>Explore Our Diverse Book Genres</h1>
+        <p>
+          Immerse yourself in a world of stories. Whatever you're looking for , our curated genres have something for everyone. <br>Browse through different categories, discover hidden gems, and dive into your next great read !
+        </p>
+
+      </div>
+    </header>
+
+    <div class="genres-section">
+        <div class="genres-container">
+            {% for genre, data in genre_books.items %}
+            <div class="genre-card">
+                <div class="genre-covers">
+                    {% for book in data.books %}
+                        <img src="{{ book.cover_img }}" alt="{{ book.title }}" />
+                    {% endfor %}
+                </div>
+                <div class="genre-info">
+                    <h3>{{ genre }}</h3>
+                    <p>{{ data.count }} books available</p>
+                    <a href="{% url 'books_app:genre_books' genre=genre %}" class="btn-genre">Explore</a>
+                  </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
